@@ -1,1 +1,113 @@
-/* css styles */
+/* ── Google Font ── */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&display=swap');
+
+/* ── Base ── */
+body {
+  font-family: 'Inter', sans-serif;
+  background-color: #f9f9fb;
+  color: #1a1a2e;
+}
+
+/* ── Navbar ── */
+.navbar {
+  background: linear-gradient(135deg, #6c63ff, #f72585) !important;
+  padding: 0.8rem 2rem;
+}
+
+.navbar-brand, .nav-link {
+  color: white !important;
+  font-weight: 700;
+  font-size: 1rem;
+  letter-spacing: 0.03em;
+}
+
+.nav-link:hover {
+  color: #ffe066 !important;
+  transition: color 0.2s;
+}
+
+/* ── Headings ── */
+h1, h2, h3 {
+  font-weight: 900;
+  color: #6c63ff;
+}
+
+h1 {
+  font-size: 2.8rem;
+  line-height: 1.2;
+}
+
+/* ── Accent / highlight color ── */
+a {
+  color: #f72585;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+a:hover {
+  color: #6c63ff;
+  text-decoration: underline;
+}
+
+/* ── Buttons ── */
+.btn-primary, .btn {
+  background: linear-gradient(135deg, #6c63ff, #f72585);
+  border: none;
+  border-radius: 25px;
+  color: white;
+  font-weight: 700;
+  padding: 0.6rem 1.5rem;
+}
+
+/* ── Cards (for projects) ── */
+.card {
+  border: none;
+  border-radius: 16px;
+  box-shadow: 0 4px 20px rgba(108, 99, 255, 0.15);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 30px rgba(247, 37, 133, 0.2);
+}
+
+/* ── Hero section (home page) ── */
+.hero {
+  padding: 4rem 2rem;
+  text-align: center;
+}
+
+.hero h1 {
+  font-size: 3.5rem;
+  background: linear-gradient(135deg, #6c63ff, #f72585);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.hero p {
+  font-size: 1.2rem;
+  color: #555;
+  max-width: 600px;
+  margin: 1rem auto;
+}
+
+/* ── Profile photo ── */
+.profile-photo {
+  width: 180px;
+  height: 180px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 5px solid #6c63ff;
+  box-shadow: 0 4px 20px rgba(108, 99, 255, 0.3);
+  margin-bottom: 1.5rem;
+}
+
+/* ── Footer ── */
+.page-footer {
+  background: #1a1a2e;
+  color: #aaa;
+  text-align: center;
+  padding: 1.5rem;
+  font-size: 0.9rem;
+}
