@@ -1,0 +1,68 @@
+---
+title: ""
+---
+
+# Projects 🚀
+
+Here are the projects I've worked on — combining data, code, and curiosity.
+
+---
+
+## 🏎️ F1 SQL Analysis
+::: {.card style="padding: 2rem; margin-bottom: 2rem;"}
+
+**Tools:** SQL, R
+
+Explored Formula 1 racing data using SQL queries to extract and analyze
+driver performance, race results, and championship standings. Combined
+SQL with R to visualize key insights from decades of F1 history.
+
+[![GitHub](https://img.shields.io/badge/GitHub-f72585?style=for-the-badge&logo=github&logoColor=white)](https://github.com/kho2934)
+
+:::
+
+---
+
+## 📝 Journal Text Analysis
+::: {.card style="padding: 2rem; margin-bottom: 2rem;"}
+
+**Tools:** R, Tidytext, ggplot2
+
+Performed text mining and sentiment analysis across 3 academic journals.
+Used natural language processing techniques to identify themes, word
+frequencies, and emotional tone across different publications.
+
+[![GitHub](https://img.shields.io/badge/GitHub-f72585?style=for-the-badge&logo=github&logoColor=white)](https://github.com/kho2934)
+
+:::
+
+---
+
+## 🎨 aRtpalette Package
+::: {.card style="padding: 2rem; margin-bottom: 2rem;"}
+
+**Tools:** R, devtools, ggplot2
+
+Independently designed and built **aRtpalette** — an R package that provides
+curated color palettes for data visualization. Inspired by art and aesthetics,
+this package makes it easy to create beautiful, cohesive plots in R.
+
+[![GitHub](https://img.shields.io/badge/GitHub-f72585?style=for-the-badge&logo=github&logoColor=white)](https://github.com/kho2934)
+
+:::
+
+---
+
+## 🌐 Personal Website
+::: {.card style="padding: 2rem; margin-bottom: 2rem;"}
+
+**Tools:** Quarto, HTML, CSS, GitHub Pages
+
+Built and deployed this personal portfolio website from scratch using Quarto
+and GitHub Pages. Designed a bold, colorful theme with custom CSS and clean
+navigation to showcase my work and skills.
+
+[![Live Site](https://img.shields.io/badge/Live_Site-6c63ff?style=for-the-badge&logoColor=white)](https://kho2934.github.io/project)
+[![GitHub](https://img.shields.io/badge/GitHub-f72585?style=for-the-badge&logo=github&logoColor=white)](https://github.com/kho2934/project)
+
+:::

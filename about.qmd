@@ -1,5 +1,50 @@
 ---
-title: "About"
+title: ""
 ---
 
-About this site
+# About Me 👤
+
+::: {.card style="padding: 2rem; margin-bottom: 2rem;"}
+I'm **Khoi Nguyen**, a Computer Science & Data Science student at **Lawrence University**.
+I love combining analytical thinking with creative problem-solving to build
+meaningful projects. When I'm not coding, you'll find me on the basketball court
+or watching Manchester United (and yes — Ronaldo is the GOAT 🐐).
+:::
+
+---
+
+## 🎓 Education
+
+::: {.card style="padding: 2rem; margin-bottom: 2rem;"}
+**Lawrence University**
+Computer Science & Data Science
+:::
+
+---
+
+## 🛠️ Skills
+
+::: {.card style="padding: 2rem; margin-bottom: 2rem;"}
+
+| Category | Tools & Technologies |
+|---|---|
+| **Languages** | Python, R, Java |
+| **Data Analysis** | Pandas, ggplot2, Tidyverse, dplyr |
+| **Data Viz** | Matplotlib, Seaborn, ggplot2, Quarto |
+| **Tools** | Git, GitHub, RStudio, VS Code |
+
+:::
+
+---
+
+## ⚽ Beyond the Code
+
+::: {.card style="padding: 2rem; margin-bottom: 2rem;"}
+
+🏀 **Basketball** — Hooping is my reset button. Nothing clears the mind like a good run.
+
+⚽ **FIFA & Football** — Die-hard **Manchester United** fan. Ronaldo is and always will be the GOAT.
+
+💻 **Tech Exploration** — Always tinkering with new tools, datasets, and side projects.
+
+:::

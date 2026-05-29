@@ -1,0 +1,64 @@
+---
+title: ""
+---
+
+# Résumé
+
+::: {.card style="padding: 2rem; margin-bottom: 1.5rem;"}
+## 🎓 Education
+
+**Lawrence University** — Appleton, WI
+
+B.A. Computer Science & Data Science *(In Progress)*
+:::
+
+---
+
+::: {.card style="padding: 2rem; margin-bottom: 1.5rem;"}
+## 🛠️ Technical Skills
+
+| Category | Tools |
+|---|---|
+| **Languages** | R, Python, Java, SQL |
+| **Data Analysis** | Tidyverse, dplyr, Pandas |
+| **Data Viz** | ggplot2, Matplotlib, Seaborn |
+| **Web & Docs** | Quarto, HTML, CSS |
+| **Tools** | Git, GitHub, RStudio, VS Code |
+:::
+
+---
+
+::: {.card style="padding: 2rem; margin-bottom: 1.5rem;"}
+## 📁 Projects
+
+**F1 SQL Analysis**
+Queried and analyzed decades of Formula 1 data using SQL and R to uncover
+driver performance trends and championship patterns.
+
+---
+
+**Journal Text Analysis**
+Applied text mining and sentiment analysis across 3 academic journals using
+R and tidytext to identify themes and word frequency patterns.
+
+---
+
+**aRtpalette** *(Independent Project)*
+Designed and built an R package providing curated color palettes for
+data visualization. Published and maintained on GitHub.
+
+---
+
+**Personal Website**
+Built and deployed a portfolio website using Quarto and GitHub Pages with
+custom CSS styling.
+:::
+
+---
+
+::: {.card style="padding: 2rem; margin-bottom: 1.5rem;"}
+## 🌐 Links
+
+- GitHub: [github.com/kho2934](https://github.com/kho2934)
+- Website: [kho2934.github.io/project](https://kho2934.github.io/project)
+:::

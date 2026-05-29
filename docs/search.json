@@ -2,15 +2,106 @@
   {
     "objectID": "index.html",
     "href": "index.html",
-    "title": "project",
+    "title": "khoi personal website",
     "section": "",
-    "text": "This is a Quarto website.\nTo learn more about Quarto websites visit https://quarto.org/docs/websites."
+    "text": "Hi, I’m Khoi Nguyen 👋\n\nComputer Science & Data Science Student\nI’m passionate about turning data into meaningful insights and building smart solutions. Currently studying CS & Data Science, always exploring new technologies and working on cool projects. In addition, if you can’t pronounce my name just remember the Koi fish."
   },
   {
     "objectID": "about.html",
     "href": "about.html",
-    "title": "About",
+    "title": "About Me 👤",
     "section": "",
-    "text": "About this site"
+    "text": "I’m Khoi Nguyen, a Computer Science & Data Science student at Lawrence University. I love combining analytical thinking with creative problem-solving to build meaningful projects. When I’m not coding, you’ll find me on the basketball court or watching Manchester United (and yes — Ronaldo is the GOAT 🐐).\n\n\n\n\n\nLawrence University Computer Science & Data Science\n\n\n\n\n\n\n\n\n\nCategory\nTools & Technologies\n\n\n\n\nLanguages\nPython, R, Java\n\n\nData Analysis\nPandas, ggplot2, Tidyverse, dplyr\n\n\nData Viz\nMatplotlib, Seaborn, ggplot2, Quarto\n\n\nTools\nGit, GitHub, RStudio, VS Code\n\n\n\n\n\n\n\n\n\n🏀 Basketball — Hooping is my reset button. Nothing clears the mind like a good run.\n⚽ FIFA & Football — Die-hard Manchester United fan. Ronaldo is and always will be the GOAT.\n💻 Tech Exploration — Always tinkering with new tools, datasets, and side projects."
+  },
+  {
+    "objectID": "projects.html",
+    "href": "projects.html",
+    "title": "Projects 🚀",
+    "section": "",
+    "text": "Here are the projects I’ve worked on — combining data, code, and curiosity.\n\n\n\n\nTools: SQL, R\nExplored Formula 1 racing data using SQL queries to extract and analyze driver performance, race results, and championship standings. Combined SQL with R to visualize key insights from decades of F1 history.\n\n\n\nGitHub\n\n\n\n\n\n\n\n\nTools: R, Tidytext, ggplot2\nPerformed text mining and sentiment analysis across 3 academic journals. Used natural language processing techniques to identify themes, word frequencies, and emotional tone across different publications.\n\n\n\nGitHub\n\n\n\n\n\n\n\n\nTools: R, devtools, ggplot2\nIndependently designed and built aRtpalette — an R package that provides curated color palettes for data visualization. Inspired by art and aesthetics, this package makes it easy to create beautiful, cohesive plots in R.\n\n\n\nGitHub\n\n\n\n\n\n\n\n\nTools: Quarto, HTML, CSS, GitHub Pages\nBuilt and deployed this personal portfolio website from scratch using Quarto and GitHub Pages. Designed a bold, colorful theme with custom CSS and clean navigation to showcase my work and skills."
+  },
+  {
+    "objectID": "projects.html#f1-sql-analysis",
+    "href": "projects.html#f1-sql-analysis",
+    "title": "Projects 🚀",
+    "section": "",
+    "text": "Tools: SQL, R\nExplored Formula 1 racing data using SQL queries to extract and analyze driver performance, race results, and championship standings. Combined SQL with R to visualize key insights from decades of F1 history.\n\n\n\nGitHub"
+  },
+  {
+    "objectID": "projects.html#journal-text-analysis",
+    "href": "projects.html#journal-text-analysis",
+    "title": "Projects 🚀",
+    "section": "",
+    "text": "Tools: R, Tidytext, ggplot2\nPerformed text mining and sentiment analysis across 3 academic journals. Used natural language processing techniques to identify themes, word frequencies, and emotional tone across different publications.\n\n\n\nGitHub"
+  },
+  {
+    "objectID": "projects.html#artpalette-package",
+    "href": "projects.html#artpalette-package",
+    "title": "Projects 🚀",
+    "section": "",
+    "text": "Tools: R, devtools, ggplot2\nIndependently designed and built aRtpalette — an R package that provides curated color palettes for data visualization. Inspired by art and aesthetics, this package makes it easy to create beautiful, cohesive plots in R.\n\n\n\nGitHub"
+  },
+  {
+    "objectID": "projects.html#personal-website",
+    "href": "projects.html#personal-website",
+    "title": "Projects 🚀",
+    "section": "",
+    "text": "Tools: Quarto, HTML, CSS, GitHub Pages\nBuilt and deployed this personal portfolio website from scratch using Quarto and GitHub Pages. Designed a bold, colorful theme with custom CSS and clean navigation to showcase my work and skills."
+  },
+  {
+    "objectID": "about.html#education",
+    "href": "about.html#education",
+    "title": "About Me 👤",
+    "section": "",
+    "text": "Lawrence University Computer Science & Data Science"
+  },
+  {
+    "objectID": "about.html#skills",
+    "href": "about.html#skills",
+    "title": "About Me 👤",
+    "section": "",
+    "text": "Category\nTools & Technologies\n\n\n\n\nLanguages\nPython, R, Java\n\n\nData Analysis\nPandas, ggplot2, Tidyverse, dplyr\n\n\nData Viz\nMatplotlib, Seaborn, ggplot2, Quarto\n\n\nTools\nGit, GitHub, RStudio, VS Code"
+  },
+  {
+    "objectID": "about.html#beyond-the-code",
+    "href": "about.html#beyond-the-code",
+    "title": "About Me 👤",
+    "section": "",
+    "text": "🏀 Basketball — Hooping is my reset button. Nothing clears the mind like a good run.\n⚽ FIFA & Football — Die-hard Manchester United fan. Ronaldo is and always will be the GOAT.\n💻 Tech Exploration — Always tinkering with new tools, datasets, and side projects."
+  },
+  {
+    "objectID": "Resume.html",
+    "href": "Resume.html",
+    "title": "Résumé",
+    "section": "",
+    "text": "Lawrence University — Appleton, WI\nB.A. Computer Science & Data Science (In Progress)\n\n\n\n\n\n\n\nCategory\nTools\n\n\n\n\nLanguages\nR, Python, Java, SQL\n\n\nData Analysis\nTidyverse, dplyr, Pandas\n\n\nData Viz\nggplot2, Matplotlib, Seaborn\n\n\nWeb & Docs\nQuarto, HTML, CSS\n\n\nTools\nGit, GitHub, RStudio, VS Code\n\n\n\n\n\n\n\nF1 SQL Analysis Queried and analyzed decades of Formula 1 data using SQL and R to uncover driver performance trends and championship patterns.\n\nJournal Text Analysis Applied text mining and sentiment analysis across 3 academic journals using R and tidytext to identify themes and word frequency patterns.\n\naRtpalette (Independent Project) Designed and built an R package providing curated color palettes for data visualization. Published and maintained on GitHub.\n\nPersonal Website Built and deployed a portfolio website using Quarto and GitHub Pages with custom CSS styling.\n\n\n\n\n\nGitHub: github.com/kho2934\nWebsite: kho2934.github.io/project"
+  },
+  {
+    "objectID": "Resume.html#education",
+    "href": "Resume.html#education",
+    "title": "Résumé",
+    "section": "",
+    "text": "Lawrence University — Appleton, WI\nB.A. Computer Science & Data Science (In Progress)"
+  },
+  {
+    "objectID": "Resume.html#technical-skills",
+    "href": "Resume.html#technical-skills",
+    "title": "Résumé",
+    "section": "",
+    "text": "Category\nTools\n\n\n\n\nLanguages\nR, Python, Java, SQL\n\n\nData Analysis\nTidyverse, dplyr, Pandas\n\n\nData Viz\nggplot2, Matplotlib, Seaborn\n\n\nWeb & Docs\nQuarto, HTML, CSS\n\n\nTools\nGit, GitHub, RStudio, VS Code"
+  },
+  {
+    "objectID": "Resume.html#projects",
+    "href": "Resume.html#projects",
+    "title": "Résumé",
+    "section": "",
+    "text": "F1 SQL Analysis Queried and analyzed decades of Formula 1 data using SQL and R to uncover driver performance trends and championship patterns.\n\nJournal Text Analysis Applied text mining and sentiment analysis across 3 academic journals using R and tidytext to identify themes and word frequency patterns.\n\naRtpalette (Independent Project) Designed and built an R package providing curated color palettes for data visualization. Published and maintained on GitHub.\n\nPersonal Website Built and deployed a portfolio website using Quarto and GitHub Pages with custom CSS styling."
+  },
+  {
+    "objectID": "Resume.html#links",
+    "href": "Resume.html#links",
+    "title": "Résumé",
+    "section": "",
+    "text": "GitHub: github.com/kho2934\nWebsite: kho2934.github.io/project"
   }
 ]

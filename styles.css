@@ -1,113 +1,135 @@
-/* ── Google Font ── */
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap');
 
-/* ── Base ── */
 body {
   font-family: 'Inter', sans-serif;
-  background-color: #f9f9fb;
-  color: #1a1a2e;
+  background-color: #fafafa;
+  color: #0a0a0a;
 }
 
 /* ── Navbar ── */
 .navbar {
-  background: linear-gradient(135deg, #6c63ff, #f72585) !important;
-  padding: 0.8rem 2rem;
+  background: #0a0a0a !important;
+  padding: 1rem 2rem;
+  border-bottom: 1px solid #222;
 }
 
-.navbar-brand, .nav-link {
-  color: white !important;
+.navbar-brand {
+  color: #ffffff !important;
   font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
   font-size: 1rem;
-  letter-spacing: 0.03em;
 }
 
-.nav-link:hover {
-  color: #ffe066 !important;
+.nav-link {
+  color: #aaaaaa !important;
+  font-weight: 500;
+  letter-spacing: 0.05em;
+  font-size: 0.9rem;
   transition: color 0.2s;
 }
 
+.nav-link:hover, .nav-link.active {
+  color: #ffffff !important;
+  border-bottom: 1px solid #fff;
+}
+
 /* ── Headings ── */
-h1, h2, h3 {
-  font-weight: 900;
-  color: #6c63ff;
-}
+h1 { font-size: 2.8rem; font-weight: 700; color: #0a0a0a; line-height: 1.2; }
+h2 { font-size: 1.6rem; font-weight: 700; color: #0a0a0a; }
+h3 { font-size: 1.1rem; font-weight: 500; color: #0a0a0a; }
 
-h1 {
-  font-size: 2.8rem;
-  line-height: 1.2;
-}
+/* ── Links ── */
+a { color: #0a0a0a; font-weight: 500; text-decoration: underline; }
+a:hover { color: #555; }
 
-/* ── Accent / highlight color ── */
-a {
-  color: #f72585;
-  text-decoration: none;
-  font-weight: 600;
-}
-
-a:hover {
-  color: #6c63ff;
-  text-decoration: underline;
-}
-
-/* ── Buttons ── */
-.btn-primary, .btn {
-  background: linear-gradient(135deg, #6c63ff, #f72585);
-  border: none;
-  border-radius: 25px;
-  color: white;
-  font-weight: 700;
-  padding: 0.6rem 1.5rem;
-}
-
-/* ── Cards (for projects) ── */
-.card {
-  border: none;
-  border-radius: 16px;
-  box-shadow: 0 4px 20px rgba(108, 99, 255, 0.15);
-  transition: transform 0.2s, box-shadow 0.2s;
-}
-
-.card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 8px 30px rgba(247, 37, 133, 0.2);
-}
-
-/* ── Hero section (home page) ── */
+/* ── Hero section ── */
 .hero {
-  padding: 4rem 2rem;
+  padding: 5rem 2rem;
   text-align: center;
+  background: #ffffff;
+  border-bottom: 1px solid #e5e5e5;
+  position: relative;
+  overflow: hidden;
 }
 
-.hero h1 {
-  font-size: 3.5rem;
-  background: linear-gradient(135deg, #6c63ff, #f72585);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
+.hero::before {
+  content: '';
+  position: absolute;
+  top: -80px; right: -80px;
+  width: 400px; height: 400px;
+  border-radius: 50%;
+  border: 1px solid #e0e0e0;
+  pointer-events: none;
 }
 
-.hero p {
-  font-size: 1.2rem;
-  color: #555;
-  max-width: 600px;
-  margin: 1rem auto;
+.hero::after {
+  content: '';
+  position: absolute;
+  top: -40px; right: -40px;
+  width: 250px; height: 250px;
+  border-radius: 50%;
+  border: 1px solid #e0e0e0;
+  pointer-events: none;
 }
+
+.hero h1 { font-size: 3.2rem; color: #0a0a0a; }
+.hero p { font-size: 1.1rem; color: #555; max-width: 580px; margin: 1rem auto; }
 
 /* ── Profile photo ── */
 .profile-photo {
-  width: 180px;
-  height: 180px;
+  width: 160px;
+  height: 160px;
   border-radius: 50%;
   object-fit: cover;
-  border: 5px solid #6c63ff;
-  box-shadow: 0 4px 20px rgba(108, 99, 255, 0.3);
+  border: 3px solid #0a0a0a;
+  margin-bottom: 1.5rem;
+  filter: grayscale(20%);
+}
+
+/* ── Badges / buttons ── */
+.btn, .btn-primary {
+  background: #0a0a0a;
+  color: #fff;
+  border: none;
+  border-radius: 25px;
+  padding: 0.5rem 1.4rem;
+  font-weight: 500;
+  font-size: 0.85rem;
+  letter-spacing: 0.04em;
+}
+
+.btn:hover { background: #333; color: #fff; }
+
+/* ── Cards ── */
+.card {
+  background: #ffffff;
+  border: 0.5px solid #e0e0e0 !important;
+  border-radius: 12px !important;
+  box-shadow: none !important;
+  transition: transform 0.2s, border-color 0.2s;
+  border-top: 3px solid #0a0a0a !important;
+}
+
+.card:hover {
+  transform: translateY(-4px);
+  border-color: #0a0a0a !important;
+}
+
+/* ── Section labels ── */
+.section-label {
+  font-size: 0.75rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #888;
   margin-bottom: 1.5rem;
 }
 
 /* ── Footer ── */
 .page-footer {
-  background: #1a1a2e;
-  color: #aaa;
+  background: #0a0a0a;
+  color: #666;
   text-align: center;
   padding: 1.5rem;
-  font-size: 0.9rem;
+  font-size: 0.85rem;
 }

@@ -1,7 +1,20 @@
 ---
-title: "project"
+title: "khoi personal website"
 ---
 
-This is a Quarto website.
+::: {.hero}
 
-To learn more about Quarto websites visit <https://quarto.org/docs/websites>.
+![](images/profile.jpeg){.profile-photo}
+
+# Hi, I'm Khoi Nguyen 👋
+
+### Computer Science & Data Science Student
+
+I'm passionate about turning data into meaningful insights and building smart solutions. Currently studying CS & Data Science, always exploring
+new technologies and working on cool projects. In addition, if you can't pronounce my name just remember the Koi fish.
+
+<br>
+
+[![GitHub](https://img.shields.io/badge/GitHub-6c63ff?style=for-the-badge&logo=github&logoColor=white)](https://github.com/kho2934)
+[![Email](https://img.shields.io/badge/Email-6c63ff?style=for-the-badge&logo=gmail&logoColor=white)](mailto:nguyenkh889@gmail.com)
+:::
