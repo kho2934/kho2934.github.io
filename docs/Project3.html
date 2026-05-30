@@ -6,8 +6,9 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
+<meta name="author" content="Group Members: [Khoi Nguyen] &amp; [Tiana Ho]">
 
-<title>resume – Khoi.T.Nguyen</title>
+<title>Love, Fear, and Social Worlds: A Text Analysis of Pride and Prejudice, Frankenstein, and Dracula – Khoi.T.Nguyen</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -118,7 +119,7 @@ ul.task-list li input[type="checkbox"] {
     </ul>
   </li>
   <li class="nav-item">
-    <a class="nav-link active" href="./Resume.html" aria-current="page"> 
+    <a class="nav-link" href="./Resume.html"> 
 <span class="menu-text">Resume</span></a>
   </li>  
 </ul>
@@ -141,71 +142,168 @@ ul.task-list li input[type="checkbox"] {
 <!-- margin-sidebar -->
     
 <!-- main -->
-<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block"></header>
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Love, Fear, and Social Worlds: A Text Analysis of Pride and Prejudice, Frankenstein, and Dracula</h1>
+</div>
 
 
 
+<div class="quarto-title-meta">
 
-<section id="résumé" class="level1">
-<h1>Résumé</h1>
-<section id="education" class="level2 card" style="padding: 2rem; margin-bottom: 1.5rem;">
-<h2 class="anchored" data-anchor-id="education">🎓 Education</h2>
-<p><strong>Lawrence University</strong> — Appleton, WI</p>
-<p>B.A. Computer Science &amp; Data Science <em>(In Progress)</em></p>
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Group Members: [Khoi Nguyen] &amp; [Tiana Ho] </p>
+          </div>
+  </div>
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<div style="display: flex; gap: 1rem; justify-content: center; margin-bottom: 1.5rem;">
+<p><img src="P&amp;P.jpg" class="img-fluid" style="width:30.0%" alt="Pride and Prejudice"> <img src="F.jpg" class="img-fluid" style="width:30.0%" alt="Frankenstein"> <img src="D.jpg" class="img-fluid" style="width:30.0%" alt="Dracula"></p>
+</div>
+<hr>
+<p>As frequent book readers, we usually attach labels to novels: Pride and Prejudice is the romance, Frankenstein is the monster story, and Dracula is the vampire horror. But those labels only tell us what the books are about, not how they create the feelings we associate with them. In this project, we work directly with those three famous novels — Jane Austen’s Pride and Prejudice (1813), Mary Shelley’s Frankenstein (1818), and Bram Stoker’s Dracula (1897) — as data. We wanted to explore whether the words themselves reveal why these books feel so different, looking at word frequency, bigrams, sentiment, emotion categories, and TF-IDF.</p>
+<section id="data-and-method" class="level2">
+<h2 class="anchored" data-anchor-id="data-and-method">Data and Method</h2>
+<p>We used the full texts from Project Gutenberg, cleaned to remove headers, chapter labels, and boilerplate. The cleaned dataset contained 12,981 lines from Dracula, 10,846 from Pride and Prejudice, and 6,359 from Frankenstein, yielding 113,129 meaningful word tokens after stop word removal.</p>
 </section>
-<hr>
-<section id="technical-skills" class="level2 card" style="padding: 2rem; margin-bottom: 1.5rem;">
-<h2 class="anchored" data-anchor-id="technical-skills">🛠️ Technical Skills</h2>
-<table class="caption-top table">
-<thead>
-<tr class="header">
-<th>Category</th>
-<th>Tools</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><strong>Languages</strong></td>
-<td>R, Python, Java, SQL</td>
-</tr>
-<tr class="even">
-<td><strong>Data Analysis</strong></td>
-<td>Tidyverse, dplyr, Pandas</td>
-</tr>
-<tr class="odd">
-<td><strong>Data Viz</strong></td>
-<td>ggplot2, Matplotlib, Seaborn</td>
-</tr>
-<tr class="even">
-<td><strong>Web &amp; Docs</strong></td>
-<td>Quarto, HTML, CSS</td>
-</tr>
-<tr class="odd">
-<td><strong>Tools</strong></td>
-<td>Git, GitHub, RStudio, VS Code</td>
-</tr>
-</tbody>
-</table>
+<section id="word-counts-the-first-literary-clues" class="level2">
+<h2 class="anchored" data-anchor-id="word-counts-the-first-literary-clues">Word Counts: The First Literary Clues</h2>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 30 × 3
+# Groups:   title [3]
+   title               word          n
+   &lt;chr&gt;               &lt;chr&gt;     &lt;int&gt;
+ 1 Dracula             time        390
+ 2 Dracula             van         322
+ 3 Dracula             night       310
+ 4 Dracula             helsing     300
+ 5 Dracula             dear        223
+ 6 Dracula             lucy        221
+ 7 Dracula             day         220
+ 8 Dracula             hand        210
+ 9 Dracula             mina        203
+10 Dracula             door        200
+11 Frankenstein        life        115
+12 Frankenstein        father      112
+13 Frankenstein        eyes        104
+14 Frankenstein        time         98
+15 Frankenstein        night        90
+16 Frankenstein        elizabeth    88
+17 Frankenstein        found        87
+18 Frankenstein        mind         85
+19 Frankenstein        heart        81
+20 Frankenstein        day          80
+21 Pride and Prejudice elizabeth   596
+22 Pride and Prejudice darcy       374
+23 Pride and Prejudice bennet      297
+24 Pride and Prejudice miss        284
+25 Pride and Prejudice jane        265
+26 Pride and Prejudice bingley     260
+27 Pride and Prejudice time        196
+28 Pride and Prejudice lady        183
+29 Pride and Prejudice sister      179
+30 Pride and Prejudice wickham     162</code></pre>
+</div>
+</div>
+<p>In Dracula, frequent words like “night,” “door,” and “Lucy” evoke darkness and danger. Frankenstein’s top words — “life,” “father,” “mind” — point to creation and inner suffering. Pride and Prejudice centers on social names: “Elizabeth,” “Darcy,” “Bennet,” reflecting a world of relationships and reputation.</p>
 </section>
-<hr>
-<section id="projects" class="level2 card" style="padding: 2rem; margin-bottom: 1.5rem;">
-<h2 class="anchored" data-anchor-id="projects">📁 Projects</h2>
-<p><strong>F1 SQL Analysis</strong> Queried and analyzed decades of Formula 1 data using SQL and R to uncover driver performance trends and championship patterns.</p>
-<hr>
-<p><strong>Journal Text Analysis</strong> Applied text mining and sentiment analysis across 3 academic journals using R and tidytext to identify themes and word frequency patterns.</p>
-<hr>
-<p><strong>aRtpalette</strong> <em>(Independent Project)</em> Designed and built an R package providing curated color palettes for data visualization. Published and maintained on GitHub.</p>
-<hr>
-<p><strong>Personal Website</strong> Built and deployed a portfolio website using Quarto and GitHub Pages with custom CSS styling.</p>
+<section id="bigrams-seeing-words-in-context" class="level2">
+<h2 class="anchored" data-anchor-id="bigrams-seeing-words-in-context">Bigrams: Seeing Words in Context</h2>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 34 × 3
+# Groups:   title [3]
+   title               bigram                    n
+   &lt;chr&gt;               &lt;chr&gt;                 &lt;int&gt;
+ 1 Dracula             van helsing             281
+ 2 Dracula             madam mina               82
+ 3 Dracula             lord godalming           63
+ 4 Dracula             dr van                   60
+ 5 Dracula             dr seward                55
+ 6 Dracula             friend john              54
+ 7 Dracula             seward’s diary           39
+ 8 Dracula             poor dear                34
+ 9 Dracula             harker’s journal         30
+10 Dracula             _dr seward’s             26
+11 Dracula             dear madam               26
+12 Frankenstein        natural philosophy       11
+13 Frankenstein        native country           10
+14 Frankenstein        de lacey                  9
+15 Frankenstein        dear victor               9
+16 Frankenstein        fellow creatures          8
+17 Frankenstein        poor girl                 8
+18 Frankenstein        mont blanc                7
+19 Frankenstein        native town               6
+20 Frankenstein        countenance expressed     5
+21 Frankenstein        dear sister               5
+22 Frankenstein        dearest victor            5
+23 Frankenstein        poor william              5
+24 Frankenstein        short time                5
+25 Pride and Prejudice lady catherine           88
+26 Pride and Prejudice miss bingley             67
+27 Pride and Prejudice miss bennet              53
+28 Pride and Prejudice sir william              37
+29 Pride and Prejudice de bourgh                33
+30 Pride and Prejudice george allen             33
+# ℹ 4 more rows</code></pre>
+</div>
+</div>
+<p>Dracula’s bigrams (“Van Helsing,” “Madam Mina”) show a group fighting a shared threat. Frankenstein’s (“natural philosophy,” “dear Victor”) reflect science tied to loneliness. Pride and Prejudice’s (“Lady Catherine,” “Miss Bennet”) reveal a world defined by titles and rank.</p>
 </section>
-<hr>
-<section id="links" class="level2 card" style="padding: 2rem; margin-bottom: 1.5rem;">
-<h2 class="anchored" data-anchor-id="links">🌐 Links</h2>
+<section id="sentiment-arc-emotional-movement-through-the-novels" class="level2">
+<h2 class="anchored" data-anchor-id="sentiment-arc-emotional-movement-through-the-novels">Sentiment Arc: Emotional Movement Through the Novels</h2>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="Project3_files/figure-html/unnamed-chunk-11-1.png" class="img-fluid figure-img" width="1056"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Pride and Prejudice has a stable emotional pattern with dips during moments of rejection and scandal. Frankenstein darkens steadily as ambition turns to guilt. Dracula is the most unpredictable, shifting between fear and hope as different characters narrate events.</p>
+</section>
+<section id="emotion-analysis-fear-and-joy" class="level2">
+<h2 class="anchored" data-anchor-id="emotion-analysis-fear-and-joy">Emotion Analysis: Fear and Joy</h2>
+<p>Using the NRC lexicon, Dracula leads in fear words (16.3%), followed by Frankenstein (15.7%) and Pride and Prejudice (10.5%). For joy, Pride and Prejudice leads (17.3%), consistent with its genre as a romantic comedy ending in happiness.</p>
+</section>
+<section id="tf-idf-each-novels-literary-fingerprint" class="level2">
+<h2 class="anchored" data-anchor-id="tf-idf-each-novels-literary-fingerprint">TF-IDF: Each Novel’s Literary Fingerprint</h2>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="Project3_files/figure-html/unnamed-chunk-12-1.png" class="img-fluid figure-img" width="1056"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Dracula’s fingerprint is dominated by character names and “Diary,” reflecting its documentary style. Frankenstein’s contrast between “Creator” and “Murderer” captures Victor’s moral failure. Pride and Prejudice’s distinctive words are entirely social — names tied to family, marriage, and reputation.</p>
+</section>
+<section id="conclusion" class="level2">
+<h2 class="anchored" data-anchor-id="conclusion">Conclusion</h2>
+<p>The three novels differ not just in plot but in the emotional worlds they build through language. Austen creates a world of social performance, Shelley explores moral consequence, and Stoker builds collective survival against the unknown. Text analysis cannot capture irony or symbolism fully, but it helps us see patterns that traditional reading might miss.</p>
+</section>
+<section id="references" class="level2">
+<h2 class="anchored" data-anchor-id="references">References</h2>
 <ul>
-<li>GitHub: <a href="https://github.com/kho2934">github.com/kho2934</a></li>
-<li>Website: <a href="https://kho2934.github.io/project">kho2934.github.io/project</a></li>
+<li>Project Gutenberg: https://www.gutenberg.org</li>
+<li>gutenbergr R package: https://docs.ropensci.org/gutenbergr</li>
+<li>Text Mining with R (Silge &amp; Robinson): https://www.tidytextmining.com</li>
 </ul>
-</section>
 
 
 </section>

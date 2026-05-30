@@ -6,8 +6,9 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
+<meta name="author" content="Khoi Nguyen &amp; Tiana Ho">
 
-<title>projects – Khoi.T.Nguyen</title>
+<title>🏎️ F1 SQL Analysis – Khoi.T.Nguyen</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -19,6 +20,41 @@ ul.task-list li input[type="checkbox"] {
   width: 0.8em;
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 </style>
 
@@ -98,12 +134,27 @@ ul.task-list li input[type="checkbox"] {
     <a class="nav-link" href="./about.html"> 
 <span class="menu-text">About</span></a>
   </li>  
-  <li class="nav-item">
-    <a class="nav-link active" href="./projects.html" aria-current="page"> 
-<span class="menu-text">Projects</span></a>
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-projects" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Projects</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-projects">    
+        <li>
+    <a class="dropdown-item" href="./projects.html">
+ <span class="dropdown-text">F1 SQL Analysis</span></a>
   </li>  
+        <li>
+    <a class="dropdown-item" href="./Project3.html">
+ <span class="dropdown-text">Love, Fear, and Social Worlds: A Text Analysis of Pride and Prejudice, Frankenstein, and Dracula</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./project4.html">
+ <span class="dropdown-text">aRtpalette</span></a>
+  </li>  
+    </ul>
+  </li>
   <li class="nav-item">
-    <a class="nav-link" href="./resume.qmd"> 
+    <a class="nav-link" href="./Resume.html"> 
 <span class="menu-text">Resume</span></a>
   </li>  
 </ul>
@@ -126,67 +177,1092 @@ ul.task-list li input[type="checkbox"] {
 <!-- margin-sidebar -->
     
 <!-- main -->
-<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block"></header>
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">🏎️ F1 SQL Analysis</h1>
+</div>
 
 
 
+<div class="quarto-title-meta">
 
-<section id="projects" class="level1">
-<h1>Projects 🚀</h1>
-<p>Here are the projects I’ve worked on — combining data, code, and curiosity.</p>
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Khoi Nguyen &amp; Tiana Ho </p>
+          </div>
+  </div>
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="overview" class="level2">
+<h2 class="anchored" data-anchor-id="overview">Overview</h2>
+<p>We used the Formula 1 dataset from Kaggle to explore how performance patterns have changed over time — looking at driver success, team dominance, grid advantage, international diversity, and scoring trends.</p>
 <hr>
-<section id="f1-sql-analysis" class="level2">
-<h2 class="anchored" data-anchor-id="f1-sql-analysis">🏎️ F1 SQL Analysis</h2>
-<div class="card" style="padding: 2rem; margin-bottom: 2rem;">
-<p><strong>Tools:</strong> SQL, R</p>
-<p>Explored Formula 1 racing data using SQL queries to extract and analyze driver performance, race results, and championship standings. Combined SQL with R to visualize key insights from decades of F1 history.</p>
-<div class="quarto-figure quarto-figure-center">
+</section>
+<section id="setup-connection" class="level2">
+<h2 class="anchored" data-anchor-id="setup-connection">Setup &amp; Connection</h2>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>con_f1 <span class="ot">&lt;-</span> <span class="fu">dbConnect</span>(duckdb<span class="sc">::</span><span class="fu">duckdb</span>(), <span class="at">dbdir =</span> <span class="st">"f1_db"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<hr>
+</section>
+<section id="loading-the-data" class="level2">
+<h2 class="anchored" data-anchor-id="loading-the-data">Loading the Data</h2>
+<p>We read in three CSV files — races, drivers, and results — which form the core of the relational database.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>races   <span class="ot">&lt;-</span> readr<span class="sc">::</span><span class="fu">read_csv</span>(<span class="st">"races.csv"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Rows: 1125 Columns: 18
+── Column specification ────────────────────────────────────────────────────────
+Delimiter: ","
+chr  (13): name, time, url, fp1_date, fp1_time, fp2_date, fp2_time, fp3_date...
+dbl   (4): raceId, year, round, circuitId
+date  (1): date
+
+ℹ Use `spec()` to retrieve the full column specification for this data.
+ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>drivers <span class="ot">&lt;-</span> readr<span class="sc">::</span><span class="fu">read_csv</span>(<span class="st">"drivers.csv"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Rows: 861 Columns: 9
+── Column specification ────────────────────────────────────────────────────────
+Delimiter: ","
+chr  (7): driverRef, number, code, forename, surname, nationality, url
+dbl  (1): driverId
+date (1): dob
+
+ℹ Use `spec()` to retrieve the full column specification for this data.
+ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>results <span class="ot">&lt;-</span> readr<span class="sc">::</span><span class="fu">read_csv</span>(<span class="st">"results.csv"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: One or more parsing issues, call `problems()` on your data frame for details,
+e.g.:
+  dat &lt;- vroom(...)
+  problems(dat)</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Rows: 26759 Columns: 18
+── Column specification ────────────────────────────────────────────────────────
+Delimiter: ","
+chr  (8): position, positionText, time, milliseconds, fastestLap, rank, fast...
+dbl (10): resultId, raceId, driverId, constructorId, number, grid, positionO...
+
+ℹ Use `spec()` to retrieve the full column specification for this data.
+ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
+</div>
+</div>
+<hr>
+</section>
+<section id="building-the-database" class="level2">
+<h2 class="anchored" data-anchor-id="building-the-database">Building the Database</h2>
+<p>We created three relational tables in DuckDB and loaded each CSV into them.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="kw">DROP</span> <span class="kw">TABLE</span> <span class="cf">IF</span> <span class="kw">EXISTS</span> races;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="kw">CREATE</span> <span class="kw">TABLE</span> races (</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>  raceId <span class="dt">INTEGER</span>, <span class="dt">year</span> <span class="dt">INTEGER</span>, <span class="fu">round</span> <span class="dt">INTEGER</span>, circuitId <span class="dt">INTEGER</span>,</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>  name <span class="dt">VARCHAR</span>, <span class="dt">date</span> <span class="dt">VARCHAR</span>, <span class="dt">time</span> <span class="dt">VARCHAR</span>, url <span class="dt">VARCHAR</span>,</span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>  fp1_date <span class="dt">VARCHAR</span>, fp1_time <span class="dt">VARCHAR</span>, fp2_date <span class="dt">VARCHAR</span>, fp2_time <span class="dt">VARCHAR</span>,</span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>  fp3_date <span class="dt">VARCHAR</span>, fp3_time <span class="dt">VARCHAR</span>, quali_date <span class="dt">VARCHAR</span>, quali_time <span class="dt">VARCHAR</span>,</span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>  sprint_date <span class="dt">VARCHAR</span>, sprint_time <span class="dt">VARCHAR</span>);</span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a><span class="kw">COPY</span> races <span class="kw">FROM</span> <span class="st">'races.csv'</span> (FORMAT CSV, <span class="kw">HEADER</span>, <span class="kw">NULL</span> <span class="st">'\N'</span>);</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="kw">DROP</span> <span class="kw">TABLE</span> <span class="cf">IF</span> <span class="kw">EXISTS</span> drivers;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="kw">CREATE</span> <span class="kw">TABLE</span> drivers (</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>  driverId <span class="dt">INTEGER</span>, driverRef <span class="dt">VARCHAR</span>, <span class="dt">number</span> <span class="dt">VARCHAR</span>, code <span class="dt">VARCHAR</span>,</span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>  forename <span class="dt">VARCHAR</span>, surname <span class="dt">VARCHAR</span>, dob <span class="dt">VARCHAR</span>, nationality <span class="dt">VARCHAR</span>, url <span class="dt">VARCHAR</span>);</span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a><span class="kw">COPY</span> drivers <span class="kw">FROM</span> <span class="st">'drivers.csv'</span> (FORMAT CSV, <span class="kw">HEADER</span>, <span class="kw">NULL</span> <span class="st">'\N'</span>);</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="kw">DROP</span> <span class="kw">TABLE</span> <span class="cf">IF</span> <span class="kw">EXISTS</span> results;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="kw">CREATE</span> <span class="kw">TABLE</span> results (</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>  resultId <span class="dt">INTEGER</span>, raceId <span class="dt">INTEGER</span>, driverId <span class="dt">INTEGER</span>, constructorId <span class="dt">INTEGER</span>,</span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>  <span class="dt">number</span> <span class="dt">INTEGER</span>, grid <span class="dt">INTEGER</span>, position <span class="dt">VARCHAR</span>, positionText <span class="dt">VARCHAR</span>,</span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>  positionOrder <span class="dt">INTEGER</span>, points <span class="dt">DOUBLE</span>, laps <span class="dt">INTEGER</span>, <span class="dt">time</span> <span class="dt">VARCHAR</span>,</span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>  milliseconds <span class="dt">VARCHAR</span>, fastestLap <span class="dt">VARCHAR</span>, <span class="fu">rank</span> <span class="dt">VARCHAR</span>,</span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>  fastestLapTime <span class="dt">VARCHAR</span>, fastestLapSpeed <span class="dt">VARCHAR</span>, statusId <span class="dt">INTEGER</span>);</span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a><span class="kw">COPY</span> results <span class="kw">FROM</span> <span class="st">'results.csv'</span> (FORMAT CSV, <span class="kw">HEADER</span>, <span class="kw">NULL</span> <span class="st">'\N'</span>);</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<hr>
+</section>
+<section id="queries" class="level2">
+<h2 class="anchored" data-anchor-id="queries">Queries</h2>
+<section id="q1-all-time-driver-rankings" class="level3">
+<h3 class="anchored" data-anchor-id="q1-all-time-driver-rankings">Q1 — All-Time Driver Rankings</h3>
+<p>Who scored the most career points? We joined results with drivers and summed points across all races.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>  d.forename <span class="op">||</span> <span class="st">' '</span> <span class="op">||</span> d.surname <span class="kw">AS</span> driver_name,</span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>  d.nationality,</span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">COUNT</span>(r.raceId) <span class="kw">AS</span> total_races,</span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">SUM</span>(r.points) <span class="kw">AS</span> total_points,</span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">MAX</span>(r.points) <span class="kw">AS</span> best_race_points</span>
+<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a><span class="kw">FROM</span> results <span class="kw">AS</span> r</span>
+<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a><span class="kw">JOIN</span> drivers <span class="kw">AS</span> d <span class="kw">ON</span> r.driverId <span class="op">=</span> d.driverId</span>
+<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a><span class="kw">WHERE</span> r.points <span class="kw">IS</span> <span class="kw">NOT</span> <span class="kw">NULL</span></span>
+<span id="cb15-10"><a href="#cb15-10" aria-hidden="true" tabindex="-1"></a><span class="kw">GROUP</span> <span class="kw">BY</span> d.driverRef, d.forename, d.surname, d.nationality</span>
+<span id="cb15-11"><a href="#cb15-11" aria-hidden="true" tabindex="-1"></a><span class="kw">ORDER</span> <span class="kw">BY</span> total_points <span class="kw">DESC</span></span>
+<span id="cb15-12"><a href="#cb15-12" aria-hidden="true" tabindex="-1"></a><span class="kw">LIMIT</span> <span class="dv">10</span>;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<table class="caption-top table table-sm table-striped small">
+<caption>Displaying records 1 - 10</caption>
+<colgroup>
+<col style="width: 26%">
+<col style="width: 16%">
+<col style="width: 16%">
+<col style="width: 17%">
+<col style="width: 23%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">driver_name</th>
+<th style="text-align: left;">nationality</th>
+<th style="text-align: right;">total_races</th>
+<th style="text-align: right;">total_points</th>
+<th style="text-align: right;">best_race_points</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Lewis Hamilton</td>
+<td style="text-align: left;">British</td>
+<td style="text-align: right;">356</td>
+<td style="text-align: right;">4820.5</td>
+<td style="text-align: right;">50</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Sebastian Vettel</td>
+<td style="text-align: left;">German</td>
+<td style="text-align: right;">300</td>
+<td style="text-align: right;">3098.0</td>
+<td style="text-align: right;">25</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Max Verstappen</td>
+<td style="text-align: left;">Dutch</td>
+<td style="text-align: right;">209</td>
+<td style="text-align: right;">2912.5</td>
+<td style="text-align: right;">26</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Fernando Alonso</td>
+<td style="text-align: left;">Spanish</td>
+<td style="text-align: right;">404</td>
+<td style="text-align: right;">2329.0</td>
+<td style="text-align: right;">25</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Kimi Räikkönen</td>
+<td style="text-align: left;">Finnish</td>
+<td style="text-align: right;">352</td>
+<td style="text-align: right;">1873.0</td>
+<td style="text-align: right;">25</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Valtteri Bottas</td>
+<td style="text-align: left;">Finnish</td>
+<td style="text-align: right;">247</td>
+<td style="text-align: right;">1788.0</td>
+<td style="text-align: right;">30</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Nico Rosberg</td>
+<td style="text-align: left;">German</td>
+<td style="text-align: right;">206</td>
+<td style="text-align: right;">1594.5</td>
+<td style="text-align: right;">25</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Sergio Pérez</td>
+<td style="text-align: left;">Mexican</td>
+<td style="text-align: right;">283</td>
+<td style="text-align: right;">1585.0</td>
+<td style="text-align: right;">25</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Michael Schumacher</td>
+<td style="text-align: left;">German</td>
+<td style="text-align: right;">308</td>
+<td style="text-align: right;">1566.0</td>
+<td style="text-align: right;">15</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Charles Leclerc</td>
+<td style="text-align: left;">Monegasque</td>
+<td style="text-align: right;">149</td>
+<td style="text-align: right;">1363.0</td>
+<td style="text-align: right;">26</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</section>
+<section id="q2-constructor-dominance-by-decade" class="level3">
+<h3 class="anchored" data-anchor-id="q2-constructor-dominance-by-decade">Q2 — Constructor Dominance by Decade</h3>
+<p>How did team success shift across eras? We bucketed results by decade and summed points per constructor.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>  res.constructorId,</span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>  <span class="cf">CASE</span></span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">WHEN</span> ra.<span class="dt">year</span> <span class="kw">BETWEEN</span> <span class="dv">1950</span> <span class="kw">AND</span> <span class="dv">1959</span> <span class="cf">THEN</span> <span class="st">'1950s'</span></span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">WHEN</span> ra.<span class="dt">year</span> <span class="kw">BETWEEN</span> <span class="dv">1960</span> <span class="kw">AND</span> <span class="dv">1969</span> <span class="cf">THEN</span> <span class="st">'1960s'</span></span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>    <span class="cf">WHEN</span> ra.<span class="dt">year</span> <span class="kw">BETWEEN</span> <span class="dv">1970</span> <span class="kw">AND</span> <span class="dv">1979</span> <span class="cf">THEN</span> <span class="st">'1970s'</span></span>
+<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a>    <span class="cf">WHEN</span> ra.<span class="dt">year</span> <span class="kw">BETWEEN</span> <span class="dv">1980</span> <span class="kw">AND</span> <span class="dv">1989</span> <span class="cf">THEN</span> <span class="st">'1980s'</span></span>
+<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a>    <span class="cf">WHEN</span> ra.<span class="dt">year</span> <span class="kw">BETWEEN</span> <span class="dv">1990</span> <span class="kw">AND</span> <span class="dv">1999</span> <span class="cf">THEN</span> <span class="st">'1990s'</span></span>
+<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a>    <span class="cf">WHEN</span> ra.<span class="dt">year</span> <span class="kw">BETWEEN</span> <span class="dv">2000</span> <span class="kw">AND</span> <span class="dv">2009</span> <span class="cf">THEN</span> <span class="st">'2000s'</span></span>
+<span id="cb16-10"><a href="#cb16-10" aria-hidden="true" tabindex="-1"></a>    <span class="cf">WHEN</span> ra.<span class="dt">year</span> <span class="kw">BETWEEN</span> <span class="dv">2010</span> <span class="kw">AND</span> <span class="dv">2019</span> <span class="cf">THEN</span> <span class="st">'2010s'</span></span>
+<span id="cb16-11"><a href="#cb16-11" aria-hidden="true" tabindex="-1"></a>    <span class="cf">ELSE</span> <span class="st">'2020s'</span></span>
+<span id="cb16-12"><a href="#cb16-12" aria-hidden="true" tabindex="-1"></a>  <span class="cf">END</span> <span class="kw">AS</span> decade,</span>
+<span id="cb16-13"><a href="#cb16-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">SUM</span>(res.points) <span class="kw">AS</span> total_points,</span>
+<span id="cb16-14"><a href="#cb16-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">COUNT</span>(<span class="kw">DISTINCT</span> res.driverId) <span class="kw">AS</span> drivers_used</span>
+<span id="cb16-15"><a href="#cb16-15" aria-hidden="true" tabindex="-1"></a><span class="kw">FROM</span> results <span class="kw">AS</span> res</span>
+<span id="cb16-16"><a href="#cb16-16" aria-hidden="true" tabindex="-1"></a><span class="kw">JOIN</span> races <span class="kw">AS</span> ra <span class="kw">ON</span> res.raceId <span class="op">=</span> ra.raceId</span>
+<span id="cb16-17"><a href="#cb16-17" aria-hidden="true" tabindex="-1"></a><span class="kw">WHERE</span> res.points <span class="kw">IS</span> <span class="kw">NOT</span> <span class="kw">NULL</span></span>
+<span id="cb16-18"><a href="#cb16-18" aria-hidden="true" tabindex="-1"></a><span class="kw">GROUP</span> <span class="kw">BY</span> res.constructorId, decade</span>
+<span id="cb16-19"><a href="#cb16-19" aria-hidden="true" tabindex="-1"></a><span class="kw">ORDER</span> <span class="kw">BY</span> decade, total_points <span class="kw">DESC</span>;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<table class="caption-top table table-sm table-striped small">
+<caption>Displaying records 1 - 10</caption>
+<thead>
+<tr class="header">
+<th style="text-align: right;">constructorId</th>
+<th style="text-align: left;">decade</th>
+<th style="text-align: right;">total_points</th>
+<th style="text-align: right;">drivers_used</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: right;">6</td>
+<td style="text-align: left;">1950s</td>
+<td style="text-align: right;">754.27</td>
+<td style="text-align: right;">48</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">105</td>
+<td style="text-align: left;">1950s</td>
+<td style="text-align: right;">313.14</td>
+<td style="text-align: right;">87</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">51</td>
+<td style="text-align: left;">1950s</td>
+<td style="text-align: right;">164.00</td>
+<td style="text-align: right;">9</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">131</td>
+<td style="text-align: left;">1950s</td>
+<td style="text-align: right;">139.14</td>
+<td style="text-align: right;">7</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">113</td>
+<td style="text-align: left;">1950s</td>
+<td style="text-align: right;">130.00</td>
+<td style="text-align: right;">85</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">118</td>
+<td style="text-align: left;">1950s</td>
+<td style="text-align: right;">108.00</td>
+<td style="text-align: right;">12</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">170</td>
+<td style="text-align: left;">1950s</td>
+<td style="text-align: right;">97.50</td>
+<td style="text-align: right;">19</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">87</td>
+<td style="text-align: left;">1950s</td>
+<td style="text-align: right;">52.00</td>
+<td style="text-align: right;">35</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">66</td>
+<td style="text-align: left;">1950s</td>
+<td style="text-align: right;">48.50</td>
+<td style="text-align: right;">16</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">108</td>
+<td style="text-align: left;">1950s</td>
+<td style="text-align: right;">40.00</td>
+<td style="text-align: right;">7</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</section>
+<section id="q3-win-rate-by-driver" class="level3">
+<h3 class="anchored" data-anchor-id="q3-win-rate-by-driver">Q3 — Win Rate by Driver</h3>
+<p>Which drivers converted starts into wins most efficiently? Minimum 50 starts required.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span></span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>  d.forename <span class="op">||</span> <span class="st">' '</span> <span class="op">||</span> d.surname <span class="kw">AS</span> driver_name,</span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>  d.nationality,</span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">COUNT</span>(<span class="op">*</span>) <span class="kw">AS</span> total_starts,</span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">SUM</span>(<span class="cf">CASE</span> <span class="cf">WHEN</span> res.positionOrder <span class="op">=</span> <span class="dv">1</span> <span class="cf">THEN</span> <span class="dv">1</span> <span class="cf">ELSE</span> <span class="dv">0</span> <span class="cf">END</span>) <span class="kw">AS</span> wins,</span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ROUND</span>(<span class="fl">100.0</span> <span class="op">*</span> <span class="fu">SUM</span>(<span class="cf">CASE</span> <span class="cf">WHEN</span> res.positionOrder <span class="op">=</span> <span class="dv">1</span> <span class="cf">THEN</span> <span class="dv">1</span> <span class="cf">ELSE</span> <span class="dv">0</span> <span class="cf">END</span>) <span class="op">/</span> <span class="fu">COUNT</span>(<span class="op">*</span>), <span class="dv">2</span>) <span class="kw">AS</span> win_rate_pct</span>
+<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a><span class="kw">FROM</span> results <span class="kw">AS</span> res</span>
+<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a><span class="kw">JOIN</span> drivers <span class="kw">AS</span> d <span class="kw">ON</span> res.driverId <span class="op">=</span> d.driverId</span>
+<span id="cb17-9"><a href="#cb17-9" aria-hidden="true" tabindex="-1"></a><span class="kw">GROUP</span> <span class="kw">BY</span> d.driverRef, d.forename, d.surname, d.nationality</span>
+<span id="cb17-10"><a href="#cb17-10" aria-hidden="true" tabindex="-1"></a><span class="kw">HAVING</span> <span class="fu">COUNT</span>(<span class="op">*</span>) <span class="op">&gt;=</span> <span class="dv">50</span></span>
+<span id="cb17-11"><a href="#cb17-11" aria-hidden="true" tabindex="-1"></a><span class="kw">ORDER</span> <span class="kw">BY</span> win_rate_pct <span class="kw">DESC</span></span>
+<span id="cb17-12"><a href="#cb17-12" aria-hidden="true" tabindex="-1"></a><span class="kw">LIMIT</span> <span class="dv">15</span>;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<table class="caption-top table table-sm table-striped small">
+<caption>Displaying records 1 - 10</caption>
+<thead>
+<tr class="header">
+<th style="text-align: left;">driver_name</th>
+<th style="text-align: left;">nationality</th>
+<th style="text-align: right;">total_starts</th>
+<th style="text-align: right;">wins</th>
+<th style="text-align: right;">win_rate_pct</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Juan Fangio</td>
+<td style="text-align: left;">Argentine</td>
+<td style="text-align: right;">58</td>
+<td style="text-align: right;">24</td>
+<td style="text-align: right;">41.38</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Jim Clark</td>
+<td style="text-align: left;">British</td>
+<td style="text-align: right;">73</td>
+<td style="text-align: right;">25</td>
+<td style="text-align: right;">34.25</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Max Verstappen</td>
+<td style="text-align: left;">Dutch</td>
+<td style="text-align: right;">209</td>
+<td style="text-align: right;">63</td>
+<td style="text-align: right;">30.14</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Michael Schumacher</td>
+<td style="text-align: left;">German</td>
+<td style="text-align: right;">308</td>
+<td style="text-align: right;">91</td>
+<td style="text-align: right;">29.55</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Lewis Hamilton</td>
+<td style="text-align: left;">British</td>
+<td style="text-align: right;">356</td>
+<td style="text-align: right;">105</td>
+<td style="text-align: right;">29.49</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Jackie Stewart</td>
+<td style="text-align: left;">British</td>
+<td style="text-align: right;">100</td>
+<td style="text-align: right;">27</td>
+<td style="text-align: right;">27.00</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Ayrton Senna</td>
+<td style="text-align: left;">Brazilian</td>
+<td style="text-align: right;">162</td>
+<td style="text-align: right;">41</td>
+<td style="text-align: right;">25.31</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Alain Prost</td>
+<td style="text-align: left;">French</td>
+<td style="text-align: right;">202</td>
+<td style="text-align: right;">51</td>
+<td style="text-align: right;">25.25</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Stirling Moss</td>
+<td style="text-align: left;">British</td>
+<td style="text-align: right;">73</td>
+<td style="text-align: right;">16</td>
+<td style="text-align: right;">21.92</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Damon Hill</td>
+<td style="text-align: left;">British</td>
+<td style="text-align: right;">122</td>
+<td style="text-align: right;">22</td>
+<td style="text-align: right;">18.03</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</section>
+<section id="q4-grid-position-vs.-finish" class="level3">
+<h3 class="anchored" data-anchor-id="q4-grid-position-vs.-finish">Q4 — Grid Position vs.&nbsp;Finish</h3>
+<p>Does starting at the front guarantee a strong result?</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span></span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>  res.grid <span class="kw">AS</span> grid_position,</span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">COUNT</span>(<span class="op">*</span>) <span class="kw">AS</span> total_occurrences,</span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ROUND</span>(<span class="fu">AVG</span>(res.positionOrder), <span class="dv">2</span>) <span class="kw">AS</span> avg_finish_position,</span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ROUND</span>(<span class="fu">AVG</span>(res.points), <span class="dv">2</span>) <span class="kw">AS</span> avg_points_earned</span>
+<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a><span class="kw">FROM</span> results <span class="kw">AS</span> res</span>
+<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a><span class="kw">WHERE</span> res.grid <span class="kw">BETWEEN</span> <span class="dv">1</span> <span class="kw">AND</span> <span class="dv">20</span></span>
+<span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a>  <span class="kw">AND</span> res.positionOrder <span class="kw">BETWEEN</span> <span class="dv">1</span> <span class="kw">AND</span> <span class="dv">20</span></span>
+<span id="cb18-9"><a href="#cb18-9" aria-hidden="true" tabindex="-1"></a><span class="kw">GROUP</span> <span class="kw">BY</span> res.grid</span>
+<span id="cb18-10"><a href="#cb18-10" aria-hidden="true" tabindex="-1"></a><span class="kw">ORDER</span> <span class="kw">BY</span> grid_position;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<table class="caption-top table table-sm table-striped small">
+<caption>Displaying records 1 - 10</caption>
+<colgroup>
+<col style="width: 20%">
+<col style="width: 25%">
+<col style="width: 28%">
+<col style="width: 25%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">grid_position</th>
+<th style="text-align: right;">total_occurrences</th>
+<th style="text-align: right;">avg_finish_position</th>
+<th style="text-align: right;">avg_points_earned</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">1</td>
+<td style="text-align: right;">1089</td>
+<td style="text-align: right;">4.90</td>
+<td style="text-align: right;">8.97</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">2</td>
+<td style="text-align: right;">1062</td>
+<td style="text-align: right;">5.63</td>
+<td style="text-align: right;">7.55</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">3</td>
+<td style="text-align: right;">1054</td>
+<td style="text-align: right;">6.38</td>
+<td style="text-align: right;">6.22</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">4</td>
+<td style="text-align: right;">1051</td>
+<td style="text-align: right;">7.09</td>
+<td style="text-align: right;">5.18</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">5</td>
+<td style="text-align: right;">1039</td>
+<td style="text-align: right;">7.88</td>
+<td style="text-align: right;">4.15</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">6</td>
+<td style="text-align: right;">1026</td>
+<td style="text-align: right;">8.29</td>
+<td style="text-align: right;">3.66</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">7</td>
+<td style="text-align: right;">1043</td>
+<td style="text-align: right;">8.92</td>
+<td style="text-align: right;">2.75</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">8</td>
+<td style="text-align: right;">1021</td>
+<td style="text-align: right;">9.41</td>
+<td style="text-align: right;">2.22</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">9</td>
+<td style="text-align: right;">1030</td>
+<td style="text-align: right;">9.60</td>
+<td style="text-align: right;">2.01</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">10</td>
+<td style="text-align: right;">1026</td>
+<td style="text-align: right;">10.57</td>
+<td style="text-align: right;">1.56</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</section>
+<section id="q5-international-diversity-over-time" class="level3">
+<h3 class="anchored" data-anchor-id="q5-international-diversity-over-time">Q5 — International Diversity Over Time</h3>
+<p>How global did F1 become across different eras?</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span></span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>  <span class="cf">CASE</span></span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">WHEN</span> ra.<span class="dt">year</span> <span class="kw">BETWEEN</span> <span class="dv">1950</span> <span class="kw">AND</span> <span class="dv">1969</span> <span class="cf">THEN</span> <span class="st">'Early Era (1950-1969)'</span></span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">WHEN</span> ra.<span class="dt">year</span> <span class="kw">BETWEEN</span> <span class="dv">1970</span> <span class="kw">AND</span> <span class="dv">1989</span> <span class="cf">THEN</span> <span class="st">'Mid Era (1970-1989)'</span></span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">WHEN</span> ra.<span class="dt">year</span> <span class="kw">BETWEEN</span> <span class="dv">1990</span> <span class="kw">AND</span> <span class="dv">2009</span> <span class="cf">THEN</span> <span class="st">'Modern Era (1990-2009)'</span></span>
+<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a>    <span class="cf">ELSE</span> <span class="st">'Hybrid Era (2010+)'</span></span>
+<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a>  <span class="cf">END</span> <span class="kw">AS</span> era,</span>
+<span id="cb19-8"><a href="#cb19-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">COUNT</span>(<span class="kw">DISTINCT</span> d.nationality) <span class="kw">AS</span> unique_nationalities,</span>
+<span id="cb19-9"><a href="#cb19-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">COUNT</span>(<span class="kw">DISTINCT</span> d.driverId) <span class="kw">AS</span> unique_drivers,</span>
+<span id="cb19-10"><a href="#cb19-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">COUNT</span>(<span class="kw">DISTINCT</span> ra.raceId) <span class="kw">AS</span> total_races</span>
+<span id="cb19-11"><a href="#cb19-11" aria-hidden="true" tabindex="-1"></a><span class="kw">FROM</span> results <span class="kw">AS</span> res</span>
+<span id="cb19-12"><a href="#cb19-12" aria-hidden="true" tabindex="-1"></a><span class="kw">JOIN</span> drivers <span class="kw">AS</span> d <span class="kw">ON</span> res.driverId <span class="op">=</span> d.driverId</span>
+<span id="cb19-13"><a href="#cb19-13" aria-hidden="true" tabindex="-1"></a><span class="kw">JOIN</span> races <span class="kw">AS</span> ra <span class="kw">ON</span> res.raceId <span class="op">=</span> ra.raceId</span>
+<span id="cb19-14"><a href="#cb19-14" aria-hidden="true" tabindex="-1"></a><span class="kw">GROUP</span> <span class="kw">BY</span> era</span>
+<span id="cb19-15"><a href="#cb19-15" aria-hidden="true" tabindex="-1"></a><span class="kw">ORDER</span> <span class="kw">BY</span> <span class="fu">MIN</span>(ra.<span class="dt">year</span>);</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<table class="caption-top table table-sm table-striped small">
+<caption>4 records</caption>
+<colgroup>
+<col style="width: 32%">
+<col style="width: 29%">
+<col style="width: 21%">
+<col style="width: 16%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">era</th>
+<th style="text-align: right;">unique_nationalities</th>
+<th style="text-align: right;">unique_drivers</th>
+<th style="text-align: right;">total_races</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Early Era (1950-1969)</td>
+<td style="text-align: right;">28</td>
+<td style="text-align: right;">477</td>
+<td style="text-align: right;">184</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Mid Era (1970-1989)</td>
+<td style="text-align: right;">27</td>
+<td style="text-align: right;">252</td>
+<td style="text-align: right;">300</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Modern Era (1990-2009)</td>
+<td style="text-align: right;">27</td>
+<td style="text-align: right;">154</td>
+<td style="text-align: right;">336</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Hybrid Era (2010+)</td>
+<td style="text-align: right;">28</td>
+<td style="text-align: right;">80</td>
+<td style="text-align: right;">305</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</section>
+<section id="q6-wins-by-nationality" class="level3">
+<h3 class="anchored" data-anchor-id="q6-wins-by-nationality">Q6 — Wins by Nationality</h3>
+<p>Which countries produced the most race winners?</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span></span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>  d.nationality,</span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">COUNT</span>(<span class="kw">DISTINCT</span> d.driverId) <span class="kw">AS</span> total_drivers,</span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">SUM</span>(<span class="cf">CASE</span> <span class="cf">WHEN</span> res.positionOrder <span class="op">=</span> <span class="dv">1</span> <span class="cf">THEN</span> <span class="dv">1</span> <span class="cf">ELSE</span> <span class="dv">0</span> <span class="cf">END</span>) <span class="kw">AS</span> total_wins,</span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">SUM</span>(res.points) <span class="kw">AS</span> total_points</span>
+<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a><span class="kw">FROM</span> results <span class="kw">AS</span> res</span>
+<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a><span class="kw">JOIN</span> drivers <span class="kw">AS</span> d <span class="kw">ON</span> res.driverId <span class="op">=</span> d.driverId</span>
+<span id="cb20-8"><a href="#cb20-8" aria-hidden="true" tabindex="-1"></a><span class="kw">WHERE</span> res.points <span class="kw">IS</span> <span class="kw">NOT</span> <span class="kw">NULL</span></span>
+<span id="cb20-9"><a href="#cb20-9" aria-hidden="true" tabindex="-1"></a><span class="kw">GROUP</span> <span class="kw">BY</span> d.nationality</span>
+<span id="cb20-10"><a href="#cb20-10" aria-hidden="true" tabindex="-1"></a><span class="kw">HAVING</span> <span class="fu">SUM</span>(<span class="cf">CASE</span> <span class="cf">WHEN</span> res.positionOrder <span class="op">=</span> <span class="dv">1</span> <span class="cf">THEN</span> <span class="dv">1</span> <span class="cf">ELSE</span> <span class="dv">0</span> <span class="cf">END</span>) <span class="op">&gt;</span> <span class="dv">0</span></span>
+<span id="cb20-11"><a href="#cb20-11" aria-hidden="true" tabindex="-1"></a><span class="kw">ORDER</span> <span class="kw">BY</span> total_wins <span class="kw">DESC</span></span>
+<span id="cb20-12"><a href="#cb20-12" aria-hidden="true" tabindex="-1"></a><span class="kw">LIMIT</span> <span class="dv">12</span>;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<table class="caption-top table table-sm table-striped small">
+<caption>Displaying records 1 - 10</caption>
+<thead>
+<tr class="header">
+<th style="text-align: left;">nationality</th>
+<th style="text-align: right;">total_drivers</th>
+<th style="text-align: right;">total_wins</th>
+<th style="text-align: right;">total_points</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">British</td>
+<td style="text-align: right;">166</td>
+<td style="text-align: right;">317</td>
+<td style="text-align: right;">11908.64</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">German</td>
+<td style="text-align: right;">50</td>
+<td style="text-align: right;">179</td>
+<td style="text-align: right;">7988.50</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Brazilian</td>
+<td style="text-align: right;">32</td>
+<td style="text-align: right;">101</td>
+<td style="text-align: right;">3423.00</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">French</td>
+<td style="text-align: right;">73</td>
+<td style="text-align: right;">81</td>
+<td style="text-align: right;">3636.33</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Dutch</td>
+<td style="text-align: right;">18</td>
+<td style="text-align: right;">63</td>
+<td style="text-align: right;">2941.50</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Finnish</td>
+<td style="text-align: right;">9</td>
+<td style="text-align: right;">57</td>
+<td style="text-align: right;">4388.50</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Australian</td>
+<td style="text-align: right;">19</td>
+<td style="text-align: right;">45</td>
+<td style="text-align: right;">3188.50</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Italian</td>
+<td style="text-align: right;">99</td>
+<td style="text-align: right;">43</td>
+<td style="text-align: right;">2040.66</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Austrian</td>
+<td style="text-align: right;">15</td>
+<td style="text-align: right;">41</td>
+<td style="text-align: right;">990.50</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Argentine</td>
+<td style="text-align: right;">24</td>
+<td style="text-align: right;">38</td>
+<td style="text-align: right;">698.92</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</section>
+<section id="q7-podium-rate-by-driver" class="level3">
+<h3 class="anchored" data-anchor-id="q7-podium-rate-by-driver">Q7 — Podium Rate by Driver</h3>
+<p>Beyond wins, who stayed on the podium most consistently? Minimum 30 starts required.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span></span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>  d.forename <span class="op">||</span> <span class="st">' '</span> <span class="op">||</span> d.surname <span class="kw">AS</span> driver_name,</span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>  d.nationality,</span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">COUNT</span>(<span class="op">*</span>) <span class="kw">AS</span> total_starts,</span>
+<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">SUM</span>(<span class="cf">CASE</span> <span class="cf">WHEN</span> res.positionOrder <span class="op">&lt;=</span> <span class="dv">3</span> <span class="cf">THEN</span> <span class="dv">1</span> <span class="cf">ELSE</span> <span class="dv">0</span> <span class="cf">END</span>) <span class="kw">AS</span> podiums,</span>
+<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ROUND</span>(<span class="fl">100.0</span> <span class="op">*</span> <span class="fu">SUM</span>(<span class="cf">CASE</span> <span class="cf">WHEN</span> res.positionOrder <span class="op">&lt;=</span> <span class="dv">3</span> <span class="cf">THEN</span> <span class="dv">1</span> <span class="cf">ELSE</span> <span class="dv">0</span> <span class="cf">END</span>) <span class="op">/</span> <span class="fu">COUNT</span>(<span class="op">*</span>), <span class="dv">1</span>) <span class="kw">AS</span> podium_rate_pct</span>
+<span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a><span class="kw">FROM</span> results <span class="kw">AS</span> res</span>
+<span id="cb21-8"><a href="#cb21-8" aria-hidden="true" tabindex="-1"></a><span class="kw">JOIN</span> drivers <span class="kw">AS</span> d <span class="kw">ON</span> res.driverId <span class="op">=</span> d.driverId</span>
+<span id="cb21-9"><a href="#cb21-9" aria-hidden="true" tabindex="-1"></a><span class="kw">GROUP</span> <span class="kw">BY</span> d.driverRef, d.forename, d.surname, d.nationality</span>
+<span id="cb21-10"><a href="#cb21-10" aria-hidden="true" tabindex="-1"></a><span class="kw">HAVING</span> <span class="fu">COUNT</span>(<span class="op">*</span>) <span class="op">&gt;=</span> <span class="dv">30</span></span>
+<span id="cb21-11"><a href="#cb21-11" aria-hidden="true" tabindex="-1"></a><span class="kw">ORDER</span> <span class="kw">BY</span> podium_rate_pct <span class="kw">DESC</span></span>
+<span id="cb21-12"><a href="#cb21-12" aria-hidden="true" tabindex="-1"></a><span class="kw">LIMIT</span> <span class="dv">12</span>;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<table class="caption-top table table-sm table-striped small">
+<caption>Displaying records 1 - 10</caption>
+<colgroup>
+<col style="width: 27%">
+<col style="width: 17%">
+<col style="width: 19%">
+<col style="width: 11%">
+<col style="width: 23%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">driver_name</th>
+<th style="text-align: left;">nationality</th>
+<th style="text-align: right;">total_starts</th>
+<th style="text-align: right;">podiums</th>
+<th style="text-align: right;">podium_rate_pct</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Juan Fangio</td>
+<td style="text-align: left;">Argentine</td>
+<td style="text-align: right;">58</td>
+<td style="text-align: right;">35</td>
+<td style="text-align: right;">60.3</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Lewis Hamilton</td>
+<td style="text-align: left;">British</td>
+<td style="text-align: right;">356</td>
+<td style="text-align: right;">202</td>
+<td style="text-align: right;">56.7</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Nino Farina</td>
+<td style="text-align: left;">Italian</td>
+<td style="text-align: right;">37</td>
+<td style="text-align: right;">20</td>
+<td style="text-align: right;">54.1</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Max Verstappen</td>
+<td style="text-align: left;">Dutch</td>
+<td style="text-align: right;">209</td>
+<td style="text-align: right;">112</td>
+<td style="text-align: right;">53.6</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Alain Prost</td>
+<td style="text-align: left;">French</td>
+<td style="text-align: right;">202</td>
+<td style="text-align: right;">106</td>
+<td style="text-align: right;">52.5</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Michael Schumacher</td>
+<td style="text-align: left;">German</td>
+<td style="text-align: right;">308</td>
+<td style="text-align: right;">155</td>
+<td style="text-align: right;">50.3</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Ayrton Senna</td>
+<td style="text-align: left;">Brazilian</td>
+<td style="text-align: right;">162</td>
+<td style="text-align: right;">80</td>
+<td style="text-align: right;">49.4</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Alberto Ascari</td>
+<td style="text-align: left;">Italian</td>
+<td style="text-align: right;">36</td>
+<td style="text-align: right;">17</td>
+<td style="text-align: right;">47.2</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Jim Clark</td>
+<td style="text-align: left;">British</td>
+<td style="text-align: right;">73</td>
+<td style="text-align: right;">32</td>
+<td style="text-align: right;">43.8</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Jackie Stewart</td>
+<td style="text-align: left;">British</td>
+<td style="text-align: right;">100</td>
+<td style="text-align: right;">43</td>
+<td style="text-align: right;">43.0</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</section>
+<section id="q8-scoring-trends-over-time" class="level3">
+<h3 class="anchored" data-anchor-id="q8-scoring-trends-over-time">Q8 — Scoring Trends Over Time</h3>
+<p>How did rule changes affect points per season?</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb22"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span></span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>  ra.<span class="dt">year</span> <span class="kw">AS</span> season_year,</span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">COUNT</span>(<span class="kw">DISTINCT</span> ra.raceId) <span class="kw">AS</span> races_in_season,</span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ROUND</span>(<span class="fu">AVG</span>(res.points), <span class="dv">3</span>) <span class="kw">AS</span> avg_points_per_result,</span>
+<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">MAX</span>(res.points) <span class="kw">AS</span> max_points_in_race</span>
+<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a><span class="kw">FROM</span> results <span class="kw">AS</span> res</span>
+<span id="cb22-7"><a href="#cb22-7" aria-hidden="true" tabindex="-1"></a><span class="kw">JOIN</span> races <span class="kw">AS</span> ra <span class="kw">ON</span> res.raceId <span class="op">=</span> ra.raceId</span>
+<span id="cb22-8"><a href="#cb22-8" aria-hidden="true" tabindex="-1"></a><span class="kw">WHERE</span> res.points <span class="kw">IS</span> <span class="kw">NOT</span> <span class="kw">NULL</span> <span class="kw">AND</span> res.points <span class="op">&gt;</span> <span class="dv">0</span></span>
+<span id="cb22-9"><a href="#cb22-9" aria-hidden="true" tabindex="-1"></a><span class="kw">GROUP</span> <span class="kw">BY</span> ra.<span class="dt">year</span></span>
+<span id="cb22-10"><a href="#cb22-10" aria-hidden="true" tabindex="-1"></a><span class="kw">ORDER</span> <span class="kw">BY</span> season_year;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<table class="caption-top table table-sm table-striped small">
+<caption>Displaying records 1 - 10</caption>
+<colgroup>
+<col style="width: 17%">
+<col style="width: 23%">
+<col style="width: 31%">
+<col style="width: 27%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">season_year</th>
+<th style="text-align: right;">races_in_season</th>
+<th style="text-align: right;">avg_points_per_result</th>
+<th style="text-align: right;">max_points_in_race</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">1950</td>
+<td style="text-align: right;">7</td>
+<td style="text-align: right;">4.308</td>
+<td style="text-align: right;">9</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">1951</td>
+<td style="text-align: right;">8</td>
+<td style="text-align: right;">4.174</td>
+<td style="text-align: right;">9</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">1952</td>
+<td style="text-align: right;">8</td>
+<td style="text-align: right;">4.683</td>
+<td style="text-align: right;">9</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">1953</td>
+<td style="text-align: right;">9</td>
+<td style="text-align: right;">4.154</td>
+<td style="text-align: right;">9</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">1954</td>
+<td style="text-align: right;">9</td>
+<td style="text-align: right;">4.227</td>
+<td style="text-align: right;">9</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">1955</td>
+<td style="text-align: right;">7</td>
+<td style="text-align: right;">3.500</td>
+<td style="text-align: right;">9</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">1956</td>
+<td style="text-align: right;">8</td>
+<td style="text-align: right;">3.840</td>
+<td style="text-align: right;">9</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">1957</td>
+<td style="text-align: right;">8</td>
+<td style="text-align: right;">4.267</td>
+<td style="text-align: right;">9</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">1958</td>
+<td style="text-align: right;">11</td>
+<td style="text-align: right;">4.709</td>
+<td style="text-align: right;">9</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">1959</td>
+<td style="text-align: right;">9</td>
+<td style="text-align: right;">4.596</td>
+<td style="text-align: right;">9</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<hr>
+</section>
+</section>
+<section id="visualizations" class="level2">
+<h2 class="anchored" data-anchor-id="visualizations">Visualizations</h2>
+<section id="career-points-vs.-win-rate" class="level3">
+<h3 class="anchored" data-anchor-id="career-points-vs.-win-rate">Career Points vs.&nbsp;Win Rate</h3>
+<p>Top drivers plotted by total career points and win percentage. Bubble size reflects number of starts.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>q1 <span class="ot">&lt;-</span> <span class="fu">dbGetQuery</span>(con_f1, <span class="st">"</span></span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a><span class="st">  SELECT d.forename || ' ' || d.surname AS driver_name, d.nationality,</span></span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a><span class="st">    COUNT(r.raceId) AS total_races, SUM(r.points) AS total_points,</span></span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a><span class="st">    MAX(r.points) AS best_race_points</span></span>
+<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a><span class="st">  FROM results AS r JOIN drivers AS d ON r.driverId = d.driverId</span></span>
+<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a><span class="st">  WHERE r.points IS NOT NULL</span></span>
+<span id="cb23-7"><a href="#cb23-7" aria-hidden="true" tabindex="-1"></a><span class="st">  GROUP BY d.driverRef, d.forename, d.surname, d.nationality</span></span>
+<span id="cb23-8"><a href="#cb23-8" aria-hidden="true" tabindex="-1"></a><span class="st">  ORDER BY total_points DESC LIMIT 10"</span>)</span>
+<span id="cb23-9"><a href="#cb23-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-10"><a href="#cb23-10" aria-hidden="true" tabindex="-1"></a>q3 <span class="ot">&lt;-</span> <span class="fu">dbGetQuery</span>(con_f1, <span class="st">"</span></span>
+<span id="cb23-11"><a href="#cb23-11" aria-hidden="true" tabindex="-1"></a><span class="st">  SELECT d.forename || ' ' || d.surname AS driver_name, d.nationality,</span></span>
+<span id="cb23-12"><a href="#cb23-12" aria-hidden="true" tabindex="-1"></a><span class="st">    COUNT(*) AS total_starts,</span></span>
+<span id="cb23-13"><a href="#cb23-13" aria-hidden="true" tabindex="-1"></a><span class="st">    SUM(CASE WHEN CAST(res.positionOrder AS INT) = 1 THEN 1 ELSE 0 END) AS wins,</span></span>
+<span id="cb23-14"><a href="#cb23-14" aria-hidden="true" tabindex="-1"></a><span class="st">    ROUND(100.0 * SUM(CASE WHEN CAST(res.positionOrder AS INT) = 1 THEN 1 ELSE 0 END) / COUNT(*), 2) AS win_rate_pct</span></span>
+<span id="cb23-15"><a href="#cb23-15" aria-hidden="true" tabindex="-1"></a><span class="st">  FROM results AS res JOIN drivers AS d ON res.driverId = d.driverId</span></span>
+<span id="cb23-16"><a href="#cb23-16" aria-hidden="true" tabindex="-1"></a><span class="st">  GROUP BY d.driverRef, d.forename, d.surname, d.nationality</span></span>
+<span id="cb23-17"><a href="#cb23-17" aria-hidden="true" tabindex="-1"></a><span class="st">  HAVING COUNT(*) &gt;= 50 ORDER BY win_rate_pct DESC LIMIT 15"</span>)</span>
+<span id="cb23-18"><a href="#cb23-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-19"><a href="#cb23-19" aria-hidden="true" tabindex="-1"></a>q4 <span class="ot">&lt;-</span> <span class="fu">dbGetQuery</span>(con_f1, <span class="st">"</span></span>
+<span id="cb23-20"><a href="#cb23-20" aria-hidden="true" tabindex="-1"></a><span class="st">  SELECT res.grid AS grid_position, COUNT(*) AS total_occurrences,</span></span>
+<span id="cb23-21"><a href="#cb23-21" aria-hidden="true" tabindex="-1"></a><span class="st">    ROUND(AVG(res.positionOrder), 2) AS avg_finish_position,</span></span>
+<span id="cb23-22"><a href="#cb23-22" aria-hidden="true" tabindex="-1"></a><span class="st">    ROUND(AVG(res.points), 2) AS avg_points_earned</span></span>
+<span id="cb23-23"><a href="#cb23-23" aria-hidden="true" tabindex="-1"></a><span class="st">  FROM results AS res</span></span>
+<span id="cb23-24"><a href="#cb23-24" aria-hidden="true" tabindex="-1"></a><span class="st">  WHERE res.grid BETWEEN 1 AND 20 AND res.positionOrder BETWEEN 1 AND 20</span></span>
+<span id="cb23-25"><a href="#cb23-25" aria-hidden="true" tabindex="-1"></a><span class="st">  GROUP BY res.grid ORDER BY grid_position"</span>)</span>
+<span id="cb23-26"><a href="#cb23-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-27"><a href="#cb23-27" aria-hidden="true" tabindex="-1"></a>q6 <span class="ot">&lt;-</span> <span class="fu">dbGetQuery</span>(con_f1, <span class="st">"</span></span>
+<span id="cb23-28"><a href="#cb23-28" aria-hidden="true" tabindex="-1"></a><span class="st">  SELECT d.nationality, COUNT(DISTINCT d.driverId) AS total_drivers,</span></span>
+<span id="cb23-29"><a href="#cb23-29" aria-hidden="true" tabindex="-1"></a><span class="st">    SUM(CASE WHEN CAST(res.positionOrder AS INT) = 1 THEN 1 ELSE 0 END) AS total_wins,</span></span>
+<span id="cb23-30"><a href="#cb23-30" aria-hidden="true" tabindex="-1"></a><span class="st">    SUM(res.points) AS total_points</span></span>
+<span id="cb23-31"><a href="#cb23-31" aria-hidden="true" tabindex="-1"></a><span class="st">  FROM results AS res JOIN drivers AS d ON res.driverId = d.driverId</span></span>
+<span id="cb23-32"><a href="#cb23-32" aria-hidden="true" tabindex="-1"></a><span class="st">  WHERE res.points IS NOT NULL GROUP BY d.nationality</span></span>
+<span id="cb23-33"><a href="#cb23-33" aria-hidden="true" tabindex="-1"></a><span class="st">  HAVING total_wins &gt; 0 ORDER BY total_wins DESC LIMIT 12"</span>)</span>
+<span id="cb23-34"><a href="#cb23-34" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-35"><a href="#cb23-35" aria-hidden="true" tabindex="-1"></a>q8 <span class="ot">&lt;-</span> <span class="fu">dbGetQuery</span>(con_f1, <span class="st">"</span></span>
+<span id="cb23-36"><a href="#cb23-36" aria-hidden="true" tabindex="-1"></a><span class="st">  SELECT CAST(ra.year AS INT) AS season_year,</span></span>
+<span id="cb23-37"><a href="#cb23-37" aria-hidden="true" tabindex="-1"></a><span class="st">    COUNT(DISTINCT ra.raceId) AS races_in_season,</span></span>
+<span id="cb23-38"><a href="#cb23-38" aria-hidden="true" tabindex="-1"></a><span class="st">    ROUND(AVG(res.points), 3) AS avg_points_per_result,</span></span>
+<span id="cb23-39"><a href="#cb23-39" aria-hidden="true" tabindex="-1"></a><span class="st">    MAX(res.points) AS max_points_in_race</span></span>
+<span id="cb23-40"><a href="#cb23-40" aria-hidden="true" tabindex="-1"></a><span class="st">  FROM results AS res JOIN races AS ra ON res.raceId = ra.raceId</span></span>
+<span id="cb23-41"><a href="#cb23-41" aria-hidden="true" tabindex="-1"></a><span class="st">  WHERE res.points IS NOT NULL AND res.points &gt; 0</span></span>
+<span id="cb23-42"><a href="#cb23-42" aria-hidden="true" tabindex="-1"></a><span class="st">  GROUP BY CAST(ra.year AS INT) ORDER BY season_year"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>viz1_data <span class="ot">&lt;-</span> q1 <span class="sc">%&gt;%</span></span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">left_join</span>(q3 <span class="sc">%&gt;%</span> <span class="fu">select</span>(driver_name, win_rate_pct, total_starts), <span class="at">by =</span> <span class="st">"driver_name"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(win_rate_pct))</span>
+<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(viz1_data, <span class="fu">aes</span>(<span class="at">x =</span> total_points, <span class="at">y =</span> win_rate_pct,</span>
+<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">size =</span> total_races, <span class="at">color =</span> nationality, <span class="at">label =</span> driver_name)) <span class="sc">+</span></span>
+<span id="cb24-7"><a href="#cb24-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">alpha =</span> <span class="fl">0.8</span>) <span class="sc">+</span></span>
+<span id="cb24-8"><a href="#cb24-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text_repel</span>(<span class="at">size =</span> <span class="fl">3.2</span>, <span class="at">fontface =</span> <span class="st">"bold"</span>, <span class="at">max.overlaps =</span> <span class="dv">15</span>) <span class="sc">+</span></span>
+<span id="cb24-9"><a href="#cb24-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_size_continuous</span>(<span class="at">range =</span> <span class="fu">c</span>(<span class="dv">4</span>, <span class="dv">14</span>), <span class="at">name =</span> <span class="st">"Total Races"</span>) <span class="sc">+</span></span>
+<span id="cb24-10"><a href="#cb24-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_brewer</span>(<span class="at">palette =</span> <span class="st">"Set1"</span>, <span class="at">name =</span> <span class="st">"Nationality"</span>) <span class="sc">+</span></span>
+<span id="cb24-11"><a href="#cb24-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"F1 All-Time Greats: Career Points vs. Win Rate"</span>,</span>
+<span id="cb24-12"><a href="#cb24-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">subtitle =</span> <span class="st">"Bubble size = number of race starts | Only drivers with 50+ starts shown"</span>,</span>
+<span id="cb24-13"><a href="#cb24-13" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"Total Career Points"</span>, <span class="at">y =</span> <span class="st">"Win Rate (%)"</span>,</span>
+<span id="cb24-14"><a href="#cb24-14" aria-hidden="true" tabindex="-1"></a>    <span class="at">caption =</span> <span class="st">"Source: Kaggle Formula 1 World Championship Dataset"</span>) <span class="sc">+</span></span>
+<span id="cb24-15"><a href="#cb24-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>(<span class="at">base_size =</span> <span class="dv">13</span>) <span class="sc">+</span></span>
+<span id="cb24-16"><a href="#cb24-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">face =</span> <span class="st">"bold"</span>, <span class="at">size =</span> <span class="dv">16</span>),</span>
+<span id="cb24-17"><a href="#cb24-17" aria-hidden="true" tabindex="-1"></a>    <span class="at">plot.subtitle =</span> <span class="fu">element_text</span>(<span class="at">color =</span> <span class="st">"grey40"</span>),</span>
+<span id="cb24-18"><a href="#cb24-18" aria-hidden="true" tabindex="-1"></a>    <span class="at">panel.grid.minor =</span> <span class="fu">element_blank</span>())</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
 <figure class="figure">
-<p><a href="https://github.com/kho2934"><img src="https://img.shields.io/badge/GitHub-f72585?style=for-the-badge&amp;logo=github&amp;logoColor=white.png" class="img-fluid figure-img"></a></p>
-<figcaption>GitHub</figcaption>
+<p><img src="projects_files/figure-html/unnamed-chunk-18-1.png" class="img-fluid figure-img" width="960"></p>
 </figure>
 </div>
 </div>
-<hr>
+</div>
 </section>
-<section id="journal-text-analysis" class="level2">
-<h2 class="anchored" data-anchor-id="journal-text-analysis">📝 Journal Text Analysis</h2>
-<div class="card" style="padding: 2rem; margin-bottom: 2rem;">
-<p><strong>Tools:</strong> R, Tidytext, ggplot2</p>
-<p>Performed text mining and sentiment analysis across 3 academic journals. Used natural language processing techniques to identify themes, word frequencies, and emotional tone across different publications.</p>
-<div class="quarto-figure quarto-figure-center">
+<section id="grid-position-vs.-finishing-position" class="level3">
+<h3 class="anchored" data-anchor-id="grid-position-vs.-finishing-position">Grid Position vs.&nbsp;Finishing Position</h3>
+<p>Starting at the front strongly predicts finishing near the front.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(q4, <span class="fu">aes</span>(<span class="at">x =</span> grid_position, <span class="at">y =</span> avg_finish_position)) <span class="sc">+</span></span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">color =</span> <span class="st">"#E10600"</span>, <span class="at">linewidth =</span> <span class="fl">1.2</span>) <span class="sc">+</span></span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">size =</span> avg_points_earned), <span class="at">color =</span> <span class="st">"#E10600"</span>, <span class="at">alpha =</span> <span class="fl">0.85</span>) <span class="sc">+</span></span>
+<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_abline</span>(<span class="at">slope =</span> <span class="dv">1</span>, <span class="at">intercept =</span> <span class="dv">0</span>, <span class="at">linetype =</span> <span class="st">"dashed"</span>, <span class="at">color =</span> <span class="st">"grey60"</span>) <span class="sc">+</span></span>
+<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">annotate</span>(<span class="st">"text"</span>, <span class="at">x =</span> <span class="dv">16</span>, <span class="at">y =</span> <span class="dv">14</span>, <span class="at">label =</span> <span class="st">"Perfect prediction</span><span class="sc">\n</span><span class="st">(grid = finish)"</span>,</span>
+<span id="cb25-6"><a href="#cb25-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">color =</span> <span class="st">"grey50"</span>, <span class="at">size =</span> <span class="fl">3.2</span>, <span class="at">fontface =</span> <span class="st">"italic"</span>) <span class="sc">+</span></span>
+<span id="cb25-7"><a href="#cb25-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_size_continuous</span>(<span class="at">range =</span> <span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">9</span>), <span class="at">name =</span> <span class="st">"Avg Points Earned"</span>) <span class="sc">+</span></span>
+<span id="cb25-8"><a href="#cb25-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">breaks =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">20</span>) <span class="sc">+</span> <span class="fu">scale_y_continuous</span>(<span class="at">breaks =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">20</span>) <span class="sc">+</span></span>
+<span id="cb25-9"><a href="#cb25-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Does Starting Position Decide the Race?"</span>,</span>
+<span id="cb25-10"><a href="#cb25-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">subtitle =</span> <span class="st">"Average finishing position by grid slot | Point size = average points scored"</span>,</span>
+<span id="cb25-11"><a href="#cb25-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"Grid (Starting) Position"</span>, <span class="at">y =</span> <span class="st">"Average Finishing Position"</span>,</span>
+<span id="cb25-12"><a href="#cb25-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">caption =</span> <span class="st">"Source: Kaggle Formula 1 World Championship Dataset"</span>) <span class="sc">+</span></span>
+<span id="cb25-13"><a href="#cb25-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>(<span class="at">base_size =</span> <span class="dv">13</span>) <span class="sc">+</span></span>
+<span id="cb25-14"><a href="#cb25-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">face =</span> <span class="st">"bold"</span>, <span class="at">size =</span> <span class="dv">15</span>),</span>
+<span id="cb25-15"><a href="#cb25-15" aria-hidden="true" tabindex="-1"></a>    <span class="at">plot.subtitle =</span> <span class="fu">element_text</span>(<span class="at">color =</span> <span class="st">"grey40"</span>),</span>
+<span id="cb25-16"><a href="#cb25-16" aria-hidden="true" tabindex="-1"></a>    <span class="at">panel.grid.minor =</span> <span class="fu">element_blank</span>())</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
 <figure class="figure">
-<p><a href="https://github.com/kho2934"><img src="https://img.shields.io/badge/GitHub-f72585?style=for-the-badge&amp;logo=github&amp;logoColor=white.png" class="img-fluid figure-img"></a></p>
-<figcaption>GitHub</figcaption>
+<p><img src="projects_files/figure-html/unnamed-chunk-19-1.png" class="img-fluid figure-img" width="864"></p>
 </figure>
 </div>
 </div>
-<hr>
+</div>
 </section>
-<section id="artpalette-package" class="level2">
-<h2 class="anchored" data-anchor-id="artpalette-package">🎨 aRtpalette Package</h2>
-<div class="card" style="padding: 2rem; margin-bottom: 2rem;">
-<p><strong>Tools:</strong> R, devtools, ggplot2</p>
-<p>Independently designed and built <strong>aRtpalette</strong> — an R package that provides curated color palettes for data visualization. Inspired by art and aesthetics, this package makes it easy to create beautiful, cohesive plots in R.</p>
-<div class="quarto-figure quarto-figure-center">
+<section id="wins-by-nationality" class="level3">
+<h3 class="anchored" data-anchor-id="wins-by-nationality">Wins by Nationality</h3>
+<p>British and German drivers lead all-time race wins by country.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>q6 <span class="sc">%&gt;%</span></span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">nationality =</span> <span class="fu">fct_reorder</span>(nationality, total_wins)) <span class="sc">%&gt;%</span></span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> nationality, <span class="at">y =</span> total_wins)) <span class="sc">+</span></span>
+<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_col</span>(<span class="at">width =</span> <span class="fl">0.75</span>, <span class="at">fill =</span> <span class="st">"#E10600"</span>) <span class="sc">+</span></span>
+<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text</span>(<span class="fu">aes</span>(<span class="at">label =</span> total_wins), <span class="at">hjust =</span> <span class="sc">-</span><span class="fl">0.2</span>, <span class="at">size =</span> <span class="fl">3.8</span>, <span class="at">fontface =</span> <span class="st">"bold"</span>) <span class="sc">+</span></span>
+<span id="cb26-6"><a href="#cb26-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_flip</span>() <span class="sc">+</span></span>
+<span id="cb26-7"><a href="#cb26-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">expand =</span> <span class="fu">expansion</span>(<span class="at">mult =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="fl">0.1</span>))) <span class="sc">+</span></span>
+<span id="cb26-8"><a href="#cb26-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Which Countries Produce the Most F1 Winners?"</span>,</span>
+<span id="cb26-9"><a href="#cb26-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">subtitle =</span> <span class="st">"Total race wins by driver nationality — all time"</span>,</span>
+<span id="cb26-10"><a href="#cb26-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="cn">NULL</span>, <span class="at">y =</span> <span class="st">"Total Race Wins"</span>,</span>
+<span id="cb26-11"><a href="#cb26-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">caption =</span> <span class="st">"Source: Kaggle Formula 1 World Championship Dataset"</span>) <span class="sc">+</span></span>
+<span id="cb26-12"><a href="#cb26-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>(<span class="at">base_size =</span> <span class="dv">13</span>) <span class="sc">+</span></span>
+<span id="cb26-13"><a href="#cb26-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">face =</span> <span class="st">"bold"</span>, <span class="at">size =</span> <span class="dv">15</span>),</span>
+<span id="cb26-14"><a href="#cb26-14" aria-hidden="true" tabindex="-1"></a>    <span class="at">plot.subtitle =</span> <span class="fu">element_text</span>(<span class="at">color =</span> <span class="st">"grey40"</span>),</span>
+<span id="cb26-15"><a href="#cb26-15" aria-hidden="true" tabindex="-1"></a>    <span class="at">panel.grid.major.y =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb26-16"><a href="#cb26-16" aria-hidden="true" tabindex="-1"></a>    <span class="at">panel.grid.minor =</span> <span class="fu">element_blank</span>())</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
 <figure class="figure">
-<p><a href="https://github.com/kho2934"><img src="https://img.shields.io/badge/GitHub-f72585?style=for-the-badge&amp;logo=github&amp;logoColor=white.png" class="img-fluid figure-img"></a></p>
-<figcaption>GitHub</figcaption>
+<p><img src="projects_files/figure-html/unnamed-chunk-20-1.png" class="img-fluid figure-img" width="864"></p>
 </figure>
 </div>
 </div>
+</div>
+</section>
+<section id="f1-scoring-trends-over-time" class="level3">
+<h3 class="anchored" data-anchor-id="f1-scoring-trends-over-time">F1 Scoring Trends Over Time</h3>
+<p>The 2010 points system change created a clear jump in average points per race.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(q8, <span class="fu">aes</span>(<span class="at">x =</span> season_year, <span class="at">y =</span> avg_points_per_result)) <span class="sc">+</span></span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">color =</span> <span class="st">"#E10600"</span>, <span class="at">linewidth =</span> <span class="fl">1.1</span>) <span class="sc">+</span></span>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">color =</span> <span class="st">"#E10600"</span>, <span class="at">size =</span> <span class="fl">1.8</span>) <span class="sc">+</span></span>
+<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> <span class="dv">2010</span>, <span class="at">linetype =</span> <span class="st">"dashed"</span>, <span class="at">color =</span> <span class="st">"grey40"</span>) <span class="sc">+</span></span>
+<span id="cb27-5"><a href="#cb27-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">annotate</span>(<span class="st">"text"</span>, <span class="at">x =</span> <span class="dv">2011</span>, <span class="at">y =</span> <span class="fu">max</span>(q8<span class="sc">$</span>avg_points_per_result) <span class="sc">*</span> <span class="fl">0.9</span>,</span>
+<span id="cb27-6"><a href="#cb27-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">label =</span> <span class="st">"New points</span><span class="sc">\n</span><span class="st">system (2010)"</span>,</span>
+<span id="cb27-7"><a href="#cb27-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">color =</span> <span class="st">"grey30"</span>, <span class="at">size =</span> <span class="fl">3.2</span>, <span class="at">hjust =</span> <span class="dv">0</span>, <span class="at">fontface =</span> <span class="st">"italic"</span>) <span class="sc">+</span></span>
+<span id="cb27-8"><a href="#cb27-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">breaks =</span> <span class="fu">seq</span>(<span class="dv">1950</span>, <span class="dv">2020</span>, <span class="dv">10</span>)) <span class="sc">+</span></span>
+<span id="cb27-9"><a href="#cb27-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"F1 Scoring Landscape Over Time"</span>,</span>
+<span id="cb27-10"><a href="#cb27-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">subtitle =</span> <span class="st">"Average points per race entry per season (points-scoring finishes only)"</span>,</span>
+<span id="cb27-11"><a href="#cb27-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"Season"</span>, <span class="at">y =</span> <span class="st">"Average Points Per Race Result"</span>,</span>
+<span id="cb27-12"><a href="#cb27-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">caption =</span> <span class="st">"Source: Kaggle Formula 1 World Championship Dataset"</span>) <span class="sc">+</span></span>
+<span id="cb27-13"><a href="#cb27-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>(<span class="at">base_size =</span> <span class="dv">13</span>) <span class="sc">+</span></span>
+<span id="cb27-14"><a href="#cb27-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">face =</span> <span class="st">"bold"</span>, <span class="at">size =</span> <span class="dv">15</span>),</span>
+<span id="cb27-15"><a href="#cb27-15" aria-hidden="true" tabindex="-1"></a>    <span class="at">plot.subtitle =</span> <span class="fu">element_text</span>(<span class="at">color =</span> <span class="st">"grey40"</span>),</span>
+<span id="cb27-16"><a href="#cb27-16" aria-hidden="true" tabindex="-1"></a>    <span class="at">panel.grid.minor =</span> <span class="fu">element_blank</span>())</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="projects_files/figure-html/unnamed-chunk-21-1.png" class="img-fluid figure-img" width="1056"></p>
+</figure>
+</div>
+</div>
+</div>
 <hr>
 </section>
-<section id="personal-website" class="level2">
-<h2 class="anchored" data-anchor-id="personal-website">🌐 Personal Website</h2>
-<div class="card" style="padding: 2rem; margin-bottom: 2rem;">
-<p><strong>Tools:</strong> Quarto, HTML, CSS, GitHub Pages</p>
-<p>Built and deployed this personal portfolio website from scratch using Quarto and GitHub Pages. Designed a bold, colorful theme with custom CSS and clean navigation to showcase my work and skills.</p>
-<p><a href="https://kho2934.github.io/project"><img src="https://img.shields.io/badge/Live_Site-6c63ff?style=for-the-badge&amp;logoColor=white.png" class="img-fluid" alt="Live Site"></a> <a href="https://github.com/kho2934/project"><img src="https://img.shields.io/badge/GitHub-f72585?style=for-the-badge&amp;logo=github&amp;logoColor=white.png" class="img-fluid" alt="GitHub"></a></p>
+</section>
+<section id="sources" class="level2">
+<h2 class="anchored" data-anchor-id="sources">Sources</h2>
+<ul>
+<li>Kaggle F1 Dataset: https://www.kaggle.com/datasets/rohanrao/formula-1-world-championship-1950-2020</li>
+<li>DuckDB R docs: https://duckdb.org/docs/api/r</li>
+<li>ggplot2: https://ggplot2.tidyverse.org</li>
+</ul>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>DBI<span class="sc">::</span><span class="fu">dbDisconnect</span>(con_f1, <span class="at">shutdown =</span> <span class="cn">TRUE</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 
 
-</section>
 </section>
 
 </main> <!-- /main -->
