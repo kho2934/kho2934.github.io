@@ -15,6 +15,6 @@ new technologies and working on cool projects. In addition, if you can't pronoun
 
 <br>
 
-[![GitHub](https://img.shields.io/badge/GitHub-6c63ff?style=for-the-badge&logo=github&logoColor=white)](https://github.com/kho2934)
+[![GitHub](https://img.shields.io/badge/GitHub-6c63ff?style=for-the-badge&logo=github&logoColor=white)](https://github.com/kho2934/kho2934.github.io)
 [![Email](https://img.shields.io/badge/Email-6c63ff?style=for-the-badge&logo=gmail&logoColor=white)](mailto:nguyenkh889@gmail.com)
 :::

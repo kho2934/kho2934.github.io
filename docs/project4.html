@@ -151,6 +151,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <a class="dropdown-item" href="./project4.html">
  <span class="dropdown-text">aRtpalette</span></a>
   </li>  
+        <li>
+    <a class="dropdown-item" href="./Paper_presentation_poster.html">
+ <span class="dropdown-text">Paper Analysis: DuckDB: An Embeddable Analytical Database</span></a>
+  </li>  
     </ul>
   </li>
   <li class="nav-item">
@@ -208,51 +212,83 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h2 class="anchored" data-anchor-id="overview">Overview</h2>
 <p><code>aRtpalette</code> is an R package that brings art-inspired color palettes into data visualizations. The package lets you store palettes as structured objects, preview them as color swatches, and expand them when a chart needs more colors than the source artwork provides.</p>
 <p>The inspiration came from the frustration of manually copying hex codes from paintings into ggplot2 charts with no clean workflow. I wanted a tool that treated color as data — something you could store, validate, visualize, and manipulate programmatically.</p>
-<hr>
 </section>
 <section id="installation" class="level2">
 <h2 class="anchored" data-anchor-id="installation">Installation</h2>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Option 1: using devtools</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>devtools<span class="sc">::</span><span class="fu">install_github</span>(<span class="st">"ADC-405-S26/aRtpalette"</span>)</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Option 2: using pak</span></span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>pak<span class="sc">::</span><span class="fu">pak</span>(<span class="st">"ADC-405-S26/aRtpalette"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<hr>
-</section>
-<section id="built-in-dataset" class="level2">
-<h2 class="anchored" data-anchor-id="built-in-dataset">Built-in Dataset</h2>
-<p>The package includes <code>artwork_palettes</code> — a table of 20 color palettes extracted from iconic artworks across art history. Each row is one painting, with five hex color codes and metadata including artist, title, and art movement.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Option 1: using devtools</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="co"># install.packages("devtools")</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>devtools<span class="sc">::</span><span class="fu">install_github</span>(<span class="st">"ADC-405-S26/aRtpalette"</span>)</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Option 2: using pak</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="co"># install.packages("pak")</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>pak<span class="sc">::</span><span class="fu">pak</span>(<span class="st">"ADC-405-S26/aRtpalette"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>Load the package using the following code.</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(aRtpalette)</span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(artwork_palettes)</span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(artwork_palettes[, <span class="fu">c</span>(<span class="st">"palette_name"</span>, <span class="st">"artist"</span>, <span class="st">"style"</span>, <span class="st">"hex1"</span>, <span class="st">"hex2"</span>, <span class="st">"hex3"</span>)])</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>       palette_name   artist              style    hex1    hex2    hex3
-1      starry_night Van Gogh Post-Impressionism #1a3431 #2b41a7 #6283c8
-2     bedroom_arles Van Gogh Post-Impressionism #374D8D #93A0CB #82A866
-3 self_portrait_hat Van Gogh Post-Impressionism #FBDC30 #A7A651 #E0BA7A
-4        great_wave  Hokusai            Ukiyo-e #1F284C #2D4472 #6E6352
-5      water_lilies    Monet      Impressionism #9F4640 #4885A4 #395A92
-6     woman_parasol    Monet      Impressionism #82A4BC #4C7899 #2F5136</code></pre>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-</div>
-<hr>
 </section>
-<section id="core-functions" class="level2">
-<h2 class="anchored" data-anchor-id="core-functions">Core Functions</h2>
-<section id="palette_from_hex-store-colors-as-a-validated-object" class="level3">
-<h3 class="anchored" data-anchor-id="palette_from_hex-store-colors-as-a-validated-object"><code>palette_from_hex()</code> — store colors as a validated object</h3>
-<p>Validates every hex code on input and returns a clear error message if any is malformed — so problems surface immediately rather than silently breaking a chart later.</p>
+<section id="motivation" class="level2">
+<h2 class="anchored" data-anchor-id="motivation">Motivation</h2>
+<p>As a person who loves and is interested in art, I often find myself struggling to bring the colors of artwork paintings into my data visualizations in R. The process was frustrating, requiring manual look-up of hex codes, copying them one by one, and then figuring out how to apply them to a ggplot2 chart. There was no clean way to store a palette as a table, visualize it before using it, or expand it when I needed more colors than the original artwork provided.</p>
+<p>The frustration motivated me to build <code>aRtpalette</code>. The goal for the package was to bring to the user a small toolkit that makes working with art-inspired Color palettes in R feel natural and streamlined. I wanted to be able to store colors as a structured object, plot them as swatches to preview what I was working with, and then expand a palette creatively, when a chart needed more colors than the original painting contained.</p>
+<p>This vignette walks you through the three core functions of the package and shows how they work together in a realistic workflow using the built-in <code>artwork_palettes</code> dataset.</p>
+</section>
+<section id="the-built-in-dataset-artwork_palettes" class="level2">
+<h2 class="anchored" data-anchor-id="the-built-in-dataset-artwork_palettes">The built-in dataset: <code>artwork_palettes</code></h2>
+<p>This is a built-in dataset with a table of 20 palettes extracted from iconic artworks across art history, sourced from <a href="https://colorlisa.com">Color Lisa</a>. Each row is one artwork, and each palette contains five hex color codes alongside metadata like the artist name and art movement.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>row <span class="ot">&lt;-</span> artwork_palettes[artwork_palettes<span class="sc">$</span>palette_name <span class="sc">==</span> <span class="st">"starry_night"</span>, ]</span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>starry_night <span class="ot">&lt;-</span> <span class="fu">palette_from_hex</span>(</span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">hex_codes =</span> <span class="fu">c</span>(row<span class="sc">$</span>hex1, row<span class="sc">$</span>hex2, row<span class="sc">$</span>hex3, row<span class="sc">$</span>hex4, row<span class="sc">$</span>hex5),</span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">name      =</span> <span class="st">"starry_night"</span></span>
-<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>starry_night</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(artwork_palettes)</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(artwork_palettes)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>       palette_name                        artwork   artist    hex1    hex2
+1      starry_night               The Starry Night Van Gogh #1a3431 #2b41a7
+2     bedroom_arles               Bedroom in Arles Van Gogh #374D8D #93A0CB
+3 self_portrait_hat Self-Portrait with a Straw Hat Van Gogh #FBDC30 #A7A651
+4        great_wave    The Great Wave off Kanagawa  Hokusai #1F284C #2D4472
+5      water_lilies            Water Lilies (1906)    Monet #9F4640 #4885A4
+6     woman_parasol           Woman with a Parasol    Monet #82A4BC #4C7899
+     hex3    hex4    hex5              style
+1 #6283c8 #ccc776 #c7ad24 Post-Impressionism
+2 #82A866 #C4B743 #A35029 Post-Impressionism
+3 #E0BA7A #9BA7B0 #5A5F80 Post-Impressionism
+4 #6E6352 #D9CCAC #ECE2C6            Ukiyo-e
+5 #395A92 #7EA860 #B985BA      Impressionism
+6 #2F5136 #B1B94C #E5DCBE      Impressionism</code></pre>
+</div>
+</div>
+<p>This is the kind of structured color table I always wanted to have available in R. You can filter it by style, browse by artist, or pull any row and immediately start working with the colors.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># How many art styles are represented?</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(artwork_palettes<span class="sc">$</span>style)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+       Art Nouveau            Baroque             Cubism           De Stijl 
+                 1                  2                  1                  1 
+  Dutch Golden Age      Expressionism      Impressionism        Pointillism 
+                 1                  1                  2                  1 
+           Pop Art Post-Impressionism        Regionalism        Renaissance 
+                 1                  3                  1                  2 
+        Surrealism            Ukiyo-e 
+                 2                  1 </code></pre>
+</div>
+</div>
+</section>
+<section id="step-1-creating-a-palette-object-with-palette_from_hex" class="level2">
+<h2 class="anchored" data-anchor-id="step-1-creating-a-palette-object-with-palette_from_hex">Step 1: Creating a palette object with <code>palette_from_hex()</code></h2>
+<p>The first function, palette_from_hex(), takes a vector of hex color codes and a name, and returns a validated palette object of class “artpalette”. The function checks that every hex code is properly formatted before proceeding, so you get a clear error message instead of a silent failure later in your workflow.</p>
+<p>Let’s use Van Gogh’s Starry Night from the dataset and create a palette object from it.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>row <span class="ot">&lt;-</span> artwork_palettes[artwork_palettes<span class="sc">$</span>palette_name <span class="sc">==</span> <span class="st">"starry_night"</span>, ]</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>starry_night <span class="ot">&lt;-</span> <span class="fu">palette_from_hex</span>(</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">hex_codes =</span> <span class="fu">c</span>(row<span class="sc">$</span>hex1, row<span class="sc">$</span>hex2, row<span class="sc">$</span>hex3, row<span class="sc">$</span>hex4, row<span class="sc">$</span>hex5),</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">name      =</span> <span class="st">"starry_night"</span></span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>starry_night</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>$name
 [1] "starry_night"
@@ -264,120 +300,195 @@ attr(,"class")
 [1] "artpalette"</code></pre>
 </div>
 </div>
-<hr>
-</section>
-<section id="plot_palette-preview-before-you-apply" class="level3">
-<h3 class="anchored" data-anchor-id="plot_palette-preview-before-you-apply"><code>plot_palette()</code> — preview before you apply</h3>
-<p>Seeing the palette as swatches before applying it to real data saves the back-and-forth of guessing whether colors will work together.</p>
+<p>The result is a list with the class “artpalette” that stores the name and color codes. This object is what the other two functions expect as input. The output is the central unit of the package. The function will catch bad input immediately:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot_palette</span>(starry_night)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># This fails gracefully with a clear message</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="fu">palette_from_hex</span>(<span class="fu">c</span>(<span class="st">"not_a_hex"</span>, <span class="st">"#FF5733"</span>), <span class="at">name =</span> <span class="st">"bad_palette"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-error">
+<pre><code>Error in `palette_from_hex()`:
+! Invalid hex codes:not_a_hex</code></pre>
+</div>
+</div>
+</section>
+<section id="step-2-visualizing-a-palette-with-plot_palette" class="level2">
+<h2 class="anchored" data-anchor-id="step-2-visualizing-a-palette-with-plot_palette">Step 2: Visualizing a palette with <code>plot_palette()</code></h2>
+<p>Before using a palette in a chart, it helps to see it. The second function, plot_palette(), takes an <code>"artpalette"</code> object and renders a clean color swatch grid showing each color block and its hex code. This is the <code>store and preview</code> step that I always wished existed.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot_palette</span>(starry_night)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="project4_files/figure-html/unnamed-chunk-3-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="project4_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid figure-img" width="576"></p>
 </figure>
 </div>
 </div>
 </div>
-<hr>
-</section>
-<section id="apply_palette-expand-for-any-chart-size" class="level3">
-<h3 class="anchored" data-anchor-id="apply_palette-expand-for-any-chart-size"><code>apply_palette()</code> — expand for any chart size</h3>
-<p>If you ask for more colors than the palette contains, the function interpolates between existing colors — letting you expand any palette creatively for any chart size.</p>
+<p>You can immediately see the deep navy blues and warm gold tones that define the painting. This visual check before applying a palette to real data is one of the most useful parts of the workflow. The function removed the process of having to go back and forth, applying colors, not liking them, and having to start over. Let’s also preview a few more palettes from the dataset to compare styles:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Exactly 3 colors for a 3-group chart</span></span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="fu">apply_palette</span>(starry_night, <span class="at">n =</span> <span class="dv">3</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Monet's Water Lilies</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>row2 <span class="ot">&lt;-</span> artwork_palettes[artwork_palettes<span class="sc">$</span>palette_name <span class="sc">==</span> <span class="st">"water_lilies"</span>, ]</span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>water_lilies <span class="ot">&lt;-</span> <span class="fu">palette_from_hex</span>(</span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">c</span>(row2<span class="sc">$</span>hex1, row2<span class="sc">$</span>hex2, row2<span class="sc">$</span>hex3, row2<span class="sc">$</span>hex4, row2<span class="sc">$</span>hex5),</span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">name =</span> <span class="st">"water_lilies"</span></span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a><span class="fu">plot_palette</span>(water_lilies)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="project4_files/figure-html/unnamed-chunk-7-1.png" class="img-fluid figure-img" width="576"></p>
+</figure>
+</div>
+</div>
+</div>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Warhol's Marilyn Monroe</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>row3 <span class="ot">&lt;-</span> artwork_palettes[artwork_palettes<span class="sc">$</span>palette_name <span class="sc">==</span> <span class="st">"marilyn_warhol"</span>, ]</span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>marilyn <span class="ot">&lt;-</span> <span class="fu">palette_from_hex</span>(</span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">c</span>(row3<span class="sc">$</span>hex1, row3<span class="sc">$</span>hex2, row3<span class="sc">$</span>hex3, row3<span class="sc">$</span>hex4, row3<span class="sc">$</span>hex5),</span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">name =</span> <span class="st">"marilyn_warhol"</span></span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a><span class="fu">plot_palette</span>(marilyn)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="project4_files/figure-html/unnamed-chunk-8-1.png" class="img-fluid figure-img" width="576"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Side by side, these three palettes already tell a story about how different art movements use color. Impressionism leans toward softness and naturalness, while Pop Art is bold and high-contrast.</p>
+</section>
+<section id="step-3-expanding-a-palette-with-apply_palette" class="level2">
+<h2 class="anchored" data-anchor-id="step-3-expanding-a-palette-with-apply_palette">Step 3: Expanding a palette with <code>apply_palette()</code></h2>
+<p>The third function,<code>apply_palette()</code>, takes an <code>"artpalette"</code> object and a number n, and returns exactly n hex color codes ready to use in a ggplot2 chart. If you ask for more colors than the palette contains, the function interpolates between the existing colors using R’s built-in color ramp. So the user can take a 5-color painting palette and expand it to 10, 15, or 20 colors for a large categorical chart. This is what I mean by “expand on the original palette for creativity.” The source painting gives you the anchor colors, and the function handles the rest.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Get exactly 3 colors from the Starry Night palette</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>three_colors <span class="ot">&lt;-</span> <span class="fu">apply_palette</span>(starry_night, <span class="at">n =</span> <span class="dv">3</span>)</span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>three_colors</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "#1A3431" "#6283C8" "#C7AD24"</code></pre>
 </div>
 </div>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Expand to 8 colors via interpolation</span></span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="fu">apply_palette</span>(starry_night, <span class="at">n =</span> <span class="dv">8</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Expand to 10 colors — interpolating between the original 5</span></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>ten_colors <span class="ot">&lt;-</span> <span class="fu">apply_palette</span>(starry_night, <span class="at">n =</span> <span class="dv">10</span>)</span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>ten_colors</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] "#1A3431" "#233B74" "#324AAB" "#5270BE" "#8096B0" "#BCBD81" "#C9BB52"
-[8] "#C7AD24"</code></pre>
+<pre><code> [1] "#1A3431" "#213965" "#293F99" "#3D56B2" "#5574C0" "#7992B5" "#A8B091"
+ [8] "#CBC46C" "#C9B848" "#C7AD24"</code></pre>
 </div>
 </div>
-<hr>
 </section>
-</section>
-<section id="full-workflow-example" class="level2">
-<h2 class="anchored" data-anchor-id="full-workflow-example">Full Workflow Example</h2>
-<p>All three functions working together in one clean pipeline — from dataset to validated palette to preview to chart, with no hex codes typed by hand.</p>
+<section id="a-complete-workflow" class="level2">
+<h2 class="anchored" data-anchor-id="a-complete-workflow">A complete workflow</h2>
+<p>Here is a full example using <code>artwork_palettes</code> and all three functions working together. We will count how many artworks belong to each art style in our dataset and visualize it using the <em>Starry Night</em> palette.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Step 1 — pull the Starry Night row and turn it into a validated palette object</span></span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>row <span class="ot">&lt;-</span> artwork_palettes[artwork_palettes<span class="sc">$</span>palette_name <span class="sc">==</span> <span class="st">"starry_night"</span>, ]</span>
-<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>pal <span class="ot">&lt;-</span> <span class="fu">palette_from_hex</span>(</span>
-<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">c</span>(row<span class="sc">$</span>hex1, row<span class="sc">$</span>hex2, row<span class="sc">$</span>hex3, row<span class="sc">$</span>hex4, row<span class="sc">$</span>hex5),</span>
-<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">name =</span> <span class="st">"starry_night"</span></span>
-<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Step 2 — preview the palette before using it</span></span>
-<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a><span class="fu">plot_palette</span>(pal)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Step 1: Pull the Starry Night palette from our dataset</span></span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>row_sn <span class="ot">&lt;-</span> artwork_palettes[artwork_palettes<span class="sc">$</span>palette_name <span class="sc">==</span> <span class="st">"starry_night"</span>, ]</span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>pal_sn <span class="ot">&lt;-</span> <span class="fu">palette_from_hex</span>( <span class="at">hex_codes =</span> <span class="fu">c</span>(row_sn<span class="sc">$</span>hex1, row_sn<span class="sc">$</span>hex2, row_sn<span class="sc">$</span>hex3, row_sn<span class="sc">$</span>hex4, row_sn<span class="sc">$</span>hex5),</span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">name =</span> <span class="st">"starry_night"</span></span>
+<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Step 2: Preview it before using it</span></span>
+<span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a><span class="fu">plot_palette</span>(pal_sn)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="project4_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="project4_files/figure-html/unnamed-chunk-11-1.png" class="img-fluid figure-img" width="576"></p>
 </figure>
 </div>
 </div>
 </div>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Step 3 — count artworks by art style from the built-in dataset</span></span>
-<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>style_counts <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(<span class="fu">table</span>(artwork_palettes<span class="sc">$</span>style))</span>
-<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(style_counts) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"style"</span>, <span class="st">"count"</span>)</span>
-<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Step 4 — expand palette to exactly the number of style groups needed</span></span>
-<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>chart_colors <span class="ot">&lt;-</span> <span class="fu">apply_palette</span>(pal, <span class="at">n =</span> <span class="fu">nrow</span>(style_counts))</span>
-<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Step 5 — apply directly to ggplot2</span></span>
-<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(style_counts, <span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">reorder</span>(style, count),</span>
-<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a>                          <span class="at">y =</span> count,</span>
-<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a>                          <span class="at">fill =</span> style)) <span class="sc">+</span></span>
-<span id="cb12-12"><a href="#cb12-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">stat =</span> <span class="st">"identity"</span>, <span class="at">width =</span> <span class="fl">0.7</span>) <span class="sc">+</span></span>
-<span id="cb12-13"><a href="#cb12-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_manual</span>(<span class="at">values =</span> chart_colors) <span class="sc">+</span></span>
-<span id="cb12-14"><a href="#cb12-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_flip</span>() <span class="sc">+</span></span>
-<span id="cb12-15"><a href="#cb12-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
-<span id="cb12-16"><a href="#cb12-16" aria-hidden="true" tabindex="-1"></a>    <span class="at">title    =</span> <span class="st">"Number of Artworks by Art Style"</span>,</span>
-<span id="cb12-17"><a href="#cb12-17" aria-hidden="true" tabindex="-1"></a>    <span class="at">subtitle =</span> <span class="st">"Colors from Van Gogh's The Starry Night"</span>,</span>
-<span id="cb12-18"><a href="#cb12-18" aria-hidden="true" tabindex="-1"></a>    <span class="at">x        =</span> <span class="st">"Art Style"</span>,</span>
-<span id="cb12-19"><a href="#cb12-19" aria-hidden="true" tabindex="-1"></a>    <span class="at">y        =</span> <span class="st">"Count"</span></span>
-<span id="cb12-20"><a href="#cb12-20" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
-<span id="cb12-21"><a href="#cb12-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>() <span class="sc">+</span></span>
-<span id="cb12-22"><a href="#cb12-22" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"none"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Step 3: Count artworks per art style in artwork_palettes</span></span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>style_counts <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(<span class="fu">table</span>(artwork_palettes<span class="sc">$</span>style))</span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(style_counts) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"style"</span>, <span class="st">"count"</span>)</span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Step 4: Expand the palette to match the number of style groups</span></span>
+<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a>chart_colors <span class="ot">&lt;-</span> <span class="fu">apply_palette</span>(pal_sn, <span class="at">n =</span> <span class="fu">nrow</span>(style_counts))</span>
+<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-8"><a href="#cb19-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Step 5: Build the chart using our own data</span></span>
+<span id="cb19-9"><a href="#cb19-9" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(style_counts, <span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">reorder</span>(style, count),</span>
+<span id="cb19-10"><a href="#cb19-10" aria-hidden="true" tabindex="-1"></a>                          <span class="at">y =</span> count,</span>
+<span id="cb19-11"><a href="#cb19-11" aria-hidden="true" tabindex="-1"></a>                          <span class="at">fill =</span> style)) <span class="sc">+</span></span>
+<span id="cb19-12"><a href="#cb19-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">stat =</span> <span class="st">"identity"</span>, <span class="at">width =</span> <span class="fl">0.7</span>) <span class="sc">+</span></span>
+<span id="cb19-13"><a href="#cb19-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_manual</span>(<span class="at">values =</span> chart_colors) <span class="sc">+</span></span>
+<span id="cb19-14"><a href="#cb19-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_flip</span>() <span class="sc">+</span></span>
+<span id="cb19-15"><a href="#cb19-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb19-16"><a href="#cb19-16" aria-hidden="true" tabindex="-1"></a>    <span class="at">title    =</span> <span class="st">"Number of Artworks by Art Style"</span>,</span>
+<span id="cb19-17"><a href="#cb19-17" aria-hidden="true" tabindex="-1"></a>    <span class="at">subtitle =</span> <span class="st">"Colors from Van Gogh's The Starry Night"</span>,</span>
+<span id="cb19-18"><a href="#cb19-18" aria-hidden="true" tabindex="-1"></a>    <span class="at">x        =</span> <span class="st">"Art Style"</span>,</span>
+<span id="cb19-19"><a href="#cb19-19" aria-hidden="true" tabindex="-1"></a>    <span class="at">y        =</span> <span class="st">"Number of Artworks"</span></span>
+<span id="cb19-20"><a href="#cb19-20" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb19-21"><a href="#cb19-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>() <span class="sc">+</span></span>
+<span id="cb19-22"><a href="#cb19-22" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"none"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="project4_files/figure-html/unnamed-chunk-7-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="project4_files/figure-html/unnamed-chunk-12-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
 </div>
-<hr>
+<p>This chart was built entirely from <code>artwork_palettes</code>. The style groups came from the <code>style</code> column, the bar heights came from counting rows, and the colors came from expanding the <em>Starry Night</em> palette using <code>apply_palette()</code>. All three functions worked together in one clean pipeline.</p>
+</section>
+<section id="creative-expansion-going-beyond-the-original-palette" class="level2">
+<h2 class="anchored" data-anchor-id="creative-expansion-going-beyond-the-original-palette">Creative expansion: going beyond the original palette</h2>
+<p>The <code>apply_palette()</code> function becomes useful when we need more colors than the original painting provides. Here we take Klimt’s <em>The Kiss</em>, a 5-color palette, and we will use the function to expand it to 15 colors, showing how the function interpolates between the original colors while staying true to the painting’s spirit.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Start with Klimt's The Kiss (5 colors)</span></span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>row_k <span class="ot">&lt;-</span> artwork_palettes[artwork_palettes<span class="sc">$</span>palette_name <span class="sc">==</span> <span class="st">"kiss_klimt"</span>, ]</span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>pal_k <span class="ot">&lt;-</span> <span class="fu">palette_from_hex</span>(</span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">c</span>(row_k<span class="sc">$</span>hex1, row_k<span class="sc">$</span>hex2, row_k<span class="sc">$</span>hex3, row_k<span class="sc">$</span>hex4, row_k<span class="sc">$</span>hex5),</span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">name =</span> <span class="st">"kiss_klimt"</span></span>
+<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a><span class="fu">plot_palette</span>(pal_k)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="project4_files/figure-html/unnamed-chunk-13-1.png" class="img-fluid figure-img" width="576"></p>
+</figure>
+</div>
+</div>
+</div>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Expand to 15 interpolated colors</span></span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>expanded <span class="ot">&lt;-</span> <span class="fu">apply_palette</span>(pal_k, <span class="at">n =</span> <span class="dv">15</span>)</span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>expanded_df <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">x     =</span> <span class="fu">seq_len</span>(<span class="dv">15</span>),</span>
+<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">color =</span> expanded</span>
+<span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb21-8"><a href="#cb21-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-9"><a href="#cb21-9" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(expanded_df, <span class="fu">aes</span>(<span class="at">x =</span> x, <span class="at">y =</span> <span class="dv">1</span>, <span class="at">fill =</span> color)) <span class="sc">+</span></span>
+<span id="cb21-10"><a href="#cb21-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_tile</span>(<span class="at">width =</span> <span class="fl">0.95</span>, <span class="at">height =</span> <span class="fl">0.8</span>) <span class="sc">+</span></span>
+<span id="cb21-11"><a href="#cb21-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_identity</span>() <span class="sc">+</span></span>
+<span id="cb21-12"><a href="#cb21-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb21-13"><a href="#cb21-13" aria-hidden="true" tabindex="-1"></a>    <span class="at">title    =</span> <span class="st">"Klimt's The Kiss — expanded from 5 to 15 colors"</span>,</span>
+<span id="cb21-14"><a href="#cb21-14" aria-hidden="true" tabindex="-1"></a>    <span class="at">subtitle =</span> <span class="st">"apply_palette() interpolates between the original palette colors"</span></span>
+<span id="cb21-15"><a href="#cb21-15" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb21-16"><a href="#cb21-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_void</span>() <span class="sc">+</span></span>
+<span id="cb21-17"><a href="#cb21-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">plot.title    =</span> <span class="fu">element_text</span>(<span class="at">hjust =</span> <span class="fl">0.5</span>, <span class="at">size =</span> <span class="dv">12</span>),</span>
+<span id="cb21-18"><a href="#cb21-18" aria-hidden="true" tabindex="-1"></a>        <span class="at">plot.subtitle =</span> <span class="fu">element_text</span>(<span class="at">hjust =</span> <span class="fl">0.5</span>, <span class="at">size =</span> <span class="dv">10</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="project4_files/figure-html/unnamed-chunk-14-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>This is what “expanding on the original palette for creativity” looks like in practice: the source painting gives you the anchor colors, and <code>apply_palette()</code> handles the rest.</p>
 </section>
 <section id="summary" class="level2">
 <h2 class="anchored" data-anchor-id="summary">Summary</h2>
-<p><code>aRtpalette</code> provides three functions that work together as a pipeline:</p>
-<ul>
-<li><strong><code>palette_from_hex()</code></strong> — store hex codes as a validated, named palette object</li>
-<li><strong><code>plot_palette()</code></strong> — preview the palette as color swatches before applying</li>
-<li><strong><code>apply_palette()</code></strong> — extract or expand the palette to exactly the colors your chart needs</li>
-</ul>
-<p>Combined with the built-in <code>artwork_palettes</code> dataset of 20 palettes from iconic artworks, the package makes it easy to bring art history into R without any manual hex code lookup.</p>
-<hr>
-</section>
-<section id="learn-more" class="level2">
-<h2 class="anchored" data-anchor-id="learn-more">Learn More</h2>
-<p>See the full vignette for a detailed walkthrough:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">vignette</span>(<span class="st">"getting-started-with-aRtpalette"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</section>
-<section id="source" class="level2">
-<h2 class="anchored" data-anchor-id="source">Source</h2>
-<ul>
-<li>GitHub: <a href="https://github.com/ADC-405-S26/aRtpalette">ADC-405-S26/aRtpalette</a></li>
-</ul>
+<p>The three functions in <code>aRtpalette</code> are designed to work as a pipeline:</p>
+<ol type="1">
+<li><p><strong><code>palette_from_hex()</code></strong> — store hex codes from any artwork as a validated, named palette object</p></li>
+<li><p><strong><code>plot_palette()</code></strong> — preview the palette as color swatches before applying it to a chart</p></li>
+<li><p><strong><code>apply_palette()</code></strong> — extract or expand the palette to exactly the number of colors your chart needs.</p></li>
+</ol>
+<p>##Source code <a href="https://github.com/ADC-405-S26/aRtpalette">aRtpalette GitHub Repository</a></p>
 
 
 </section>

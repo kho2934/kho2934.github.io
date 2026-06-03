@@ -52,6 +52,12 @@ data visualization. Published and maintained on GitHub.
 **Personal Website**
 Built and deployed a portfolio website using Quarto and GitHub Pages with
 custom CSS styling.
+
+---
+
+**Paper Analysis: DuckDB: An Embeddable Analytical Database**
+IA concise analysis of Raasveldt and Mühleisen’s DuckDB paper, focusing on how DuckDB fills the gap between lightweight embedded databases and powerful analytical database systems. The reflection discusses the paper’s problem, design approach, trade-offs, influence, and connection to modern data science workflows.
+
 :::
 
 ---

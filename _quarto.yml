@@ -18,6 +18,9 @@ website:
             text: "Love, Fear, and Social Worlds: A Text Analysis of Pride and Prejudice, Frankenstein, and Dracula"
           - href: project4.qmd
             text: "aRtpalette"
+          - href: Paper_presentation_poster.html
+            text: "Paper Analysis: DuckDB: An Embeddable Analytical Database"
+            
       - href: Resume.qmd
         text: Resume
     right:
