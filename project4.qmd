@@ -236,5 +236,6 @@ The three functions in `aRtpalette` are designed to work as a pipeline:
 
 3. **`apply_palette()`** — extract or expand the palette to exactly the number of colors your chart needs.
 
-##Source code
+## Source code
+
 [aRtpalette GitHub Repository](https://github.com/ADC-405-S26/aRtpalette)

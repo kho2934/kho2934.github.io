@@ -20,6 +20,8 @@ website:
             text: "aRtpalette"
           - href: Paper_presentation_poster.html
             text: "Paper Analysis: DuckDB: An Embeddable Analytical Database"
+          - href: TitanicProject.html
+            text: "Survival on the Titanic: Analyzing Patterns and Building Predictive Models"
             
       - href: Resume.qmd
         text: Resume

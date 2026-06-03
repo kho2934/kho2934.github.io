@@ -220,7 +220,7 @@ ORDER BY MIN(ra.year);
 ```
 
 ### Q6 — Wins by Nationality
-THis query looks at which countries have produced the most successful F1 drivers.
+This query looks at which countries have produced the most successful F1 drivers.
 We joined race results with driver information and grouped the data by nationality.
 Then we compare how many drivers each country had, how many race wins they earned, and how many total points they scored.
 

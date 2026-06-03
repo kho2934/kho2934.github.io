@@ -1,5 +1,5 @@
 ---
-title: "khoi personal website"
+title: "khoi's personal website"
 ---
 
 ::: {.hero}
@@ -11,7 +11,7 @@ title: "khoi personal website"
 ### Computer Science & Data Science Student
 
 I'm passionate about turning data into meaningful insights and building smart solutions. Currently studying CS & Data Science, always exploring
-new technologies and working on cool projects. In addition, if you can't pronounce my name just remember the Koi fish.
+new technologies and working on creative data projects. In addition, if you can't pronounce my name just remember the Koi fish.
 
 <br>
 
