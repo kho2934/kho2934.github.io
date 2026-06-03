@@ -67,7 +67,7 @@
     "href": "projects.html#source-code",
     "title": "🏎️ F1 SQL Analysis",
     "section": "Source code",
-    "text": "Source code"
+    "text": "Source code\nSQL project repository"
   },
   {
     "objectID": "Resume.html",
@@ -173,6 +173,13 @@
     "title": "Love, Fear, and Social Worlds: A Text Analysis of Pride and Prejudice, Frankenstein, and Dracula",
     "section": "References",
     "text": "References\n\nProject Gutenberg: https://www.gutenberg.org\ngutenbergr R package: https://docs.ropensci.org/gutenbergr\nText Mining with R (Silge & Robinson): https://www.tidytextmining.com"
+  },
+  {
+    "objectID": "Project3.html#source-code",
+    "href": "Project3.html#source-code",
+    "title": "Love, Fear, and Social Worlds: A Text Analysis of Pride and Prejudice, Frankenstein, and Dracula",
+    "section": "Source code",
+    "text": "Source code\nText analysis project repository"
   },
   {
     "objectID": "project4.html",

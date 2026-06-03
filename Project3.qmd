@@ -290,3 +290,7 @@ patterns that traditional reading might miss.
 - Project Gutenberg: https://www.gutenberg.org
 - gutenbergr R package: https://docs.ropensci.org/gutenbergr
 - Text Mining with R (Silge & Robinson): https://www.tidytextmining.com
+
+## Source code
+
+[Text analysis project repository](https://github.com/ADC-405-S26/Project_3_TextAnalysis_Team_2)

@@ -494,3 +494,4 @@ DBI::dbDisconnect(con_f1, shutdown = TRUE)
 
 ## Source code
 
+[SQL project repository](https://github.com/ADC-405-S26/Project_3_TextAnalysis_Team_2)
