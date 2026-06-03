@@ -57,6 +57,8 @@ custom CSS styling.
 **Paper Analysis: DuckDB: An Embeddable Analytical Database**
 IA concise analysis of Raasveldt and Mühleisen’s DuckDB paper, focusing on how DuckDB fills the gap between lightweight embedded databases and powerful analytical database systems. The reflection discusses the paper’s problem, design approach, trade-offs, influence, and connection to modern data science workflows.
 
+---
+
 **Titanic Survival Prediction with Machine Learning in R** *(Independent Project)*
 A machine learning project that uses the Titanic passenger dataset to predict survival outcomes. The project explores passenger demographics, handles missing data, applies feature engineering, compares models such as logistic regression, KNN, decision tree, and random forest, and uses model performance to identify the strongest predictive approach.
 :::
@@ -67,5 +69,5 @@ A machine learning project that uses the Titanic passenger dataset to predict su
 ## 🌐 Links
 
 - GitHub: [github.com/kho2934](https://github.com/kho2934)
-- Website: [kho2934.github.io/project](https://github.com/kho2934/kho2934.github.io)
+- Website: [kho2934.github.io/project](https://kho2934.github.io/)
 :::
