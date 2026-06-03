@@ -26,13 +26,12 @@ Computer Science & Data Science
 
 ::: {.card style="padding: 2rem; margin-bottom: 2rem;"}
 
-| Category | Tools & Technologies |
+| Category | Tools |
 |---|---|
-| **Languages** | Python, R, Java |
-| **Data Analysis** | Pandas, ggplot2, Tidyverse, dplyr |
-| **Data Viz** | Matplotlib, Seaborn, ggplot2, Quarto |
-| **Tools** | Git, GitHub, RStudio, VS Code |
-
+| Languages | R, Python, Java, SQL |
+| Data Analysis | Tidyverse, dplyr, Pandas |
+| Data Viz | ggplot2, Matplotlib, Seaborn |
+| Web & Docs | Quarto, HTML, CSS |
 :::
 
 ---
