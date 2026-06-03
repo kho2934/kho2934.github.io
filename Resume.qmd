@@ -28,6 +28,36 @@ B.A. Computer Science & Data Science *(In Progress)*
 ---
 
 ::: {.card style="padding: 2rem; margin-bottom: 1.5rem;"}
+
+## 💼 Technical Experience
+
+### Software Engineering Intern, Agricultural Data Platform  
+**International Rice Research Institute**  
+Hanoi, Vietnam  
+June 2025 to September 2025
+
+- Created RESTful APIs for user authentication, including login, registration, and OTP verification.
+- Designed backend logic for securely handling login data and user account workflows.
+- Built front-end interface components based on Figma design prototypes to support a consistent user experience.
+- Collaborated with cross-functional team members to connect authentication APIs with front-end interfaces.
+- Tested and debugged system features to improve the reliability of data transmission between client and server.
+
+### Front-End Developer Intern  
+**Adaptis Vietnam**  
+Hanoi, Vietnam  
+June 2024 to September 2024
+
+- Developed responsive React components using hooks and component-based architecture.
+- Integrated REST APIs to fetch and render dynamic data, manage state, and handle JSON responses.
+- Collaborated with backend developers to support smooth API communication and consistent data flow.
+- Translated Figma designs into functional React interfaces.
+- Performed debugging and front-end performance improvements.
+
+:::
+
+---
+
+::: {.card style="padding: 2rem; margin-bottom: 1.5rem;"}
 ## 📁 Projects
 
 **F1 SQL Analysis**
@@ -68,6 +98,9 @@ A machine learning project that uses the Titanic passenger dataset to predict su
 ::: {.card style="padding: 2rem; margin-bottom: 1.5rem;"}
 ## 🌐 Links
 
+- Email: [ntkhoi2018@gmail.com](mailto:ntkhoi2018@gmail.com)
 - GitHub: [github.com/kho2934](https://github.com/kho2934)
-- Website: [kho2934.github.io/project](https://kho2934.github.io/)
+- Website: [kho2934.github.io](https://kho2934.github.io/)
+- Website Source Code: [kho2934/kho2934.github.io](https://github.com/kho2934/kho2934.github.io)
+
 :::
